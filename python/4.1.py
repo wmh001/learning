@@ -1,4 +1,4 @@
-# 范围for循环
+# 遍历列表
 mangicians = ['alice', 'david', 'carolina']
 for mangician in mangicians:
     print(mangician)
