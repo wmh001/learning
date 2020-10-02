@@ -1,0 +1,63 @@
+#pragma once
+#include <vector>
+#include "Math.h"
+#include <cstdint>
+
+class Actor
+{
+public:
+	//  定义角色的状态
+	enum State
+	{
+		EActive,  //  活跃
+		EPaused,  //  暂停
+		EDead  //  死亡
+	};
+	//  构造函数
+	Actor(class Game* game);
+	//  析构函数
+	virtual ~Actor();
+	//  更新
+	void Update(float deltaTime);
+	//  更新组件
+	void UpdateComponents(float deltaTime);
+	//  更新角色
+	virtual void UpdateActor(float deltaTime);
+	//  输入处理
+	void ProcessInput(const uint8_t* keyState);
+	// Any actor-specific input code (overridable)
+	virtual void ActorInput(const uint8_t* keyState);
+	//  访问和修改位置
+	const Vector2& GetPosition() const { return mPosition; }
+	void SetPosition(const Vector2& pos) { mPosition = pos; }
+	//  访问和修改比例
+	float GetScale() const { return mScale; }
+	void SetScale(float scale) { mScale = scale; }
+	//  访问和修改角速度
+	float GetRotation() const { return mRotation; }
+	void SetRotation(float rotation) { mRotation = rotation; }
+	//  向量单位化
+	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), -Math::Sin(mRotation)); }
+	//  访问和设置生活状态
+	State GetState() const { return mState; }
+	void SetState(State state) { mState = state; }
+	//  访问所属游戏
+	class Game* GetGame() { return mGame; }
+	//  添加/移除组件
+	void AddComponent(class Component* component);
+	void RemoveComponent(class Component* component);
+private:
+	//  角色的生活状态
+	State mState;
+	//  位置
+	Vector2 mPosition;
+	//  比例
+	float mScale;
+	//  角速度
+	float mRotation;
+	//  所有组件的容器
+	std::vector<class Component*> mComponents;
+	//  所属游戏
+	class Game* mGame;
+};
+
