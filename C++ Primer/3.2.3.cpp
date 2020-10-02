@@ -1,6 +1,7 @@
 /*
-#Copyright 2020 BingchunFeng. All rights reserved
+#Copyright[2020]<Wang Maohua>
 */
+
 #include <iostream>
 
 int main() {

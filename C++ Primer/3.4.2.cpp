@@ -1,6 +1,7 @@
 /*
-#Copyright 2020 BingchunFeng. All rights reserved
+#Copyright[2020]<Wang Maohua>
 */
+
 //  迭代器支持的运算：+n、-n、+=n、-=n、-、>、>=、<、<=
 #include <iostream>
 #include <vector>
