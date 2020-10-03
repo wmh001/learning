@@ -47,9 +47,9 @@ print(fig.canvas.get_supported_filetypes())
 # 方法二
 # IPython或脚本
 # plt.savefig(str 文件名)
-plt.savefig("3.3.7.pdf")
+plt.savefig(r"python物理建模初学者指南\3.3.7.pdf")
 matplotlib.rcParams['svg.fonttype'] = 'none'
-plt.savefig("3.3.7.svg")
+plt.savefig(r"python物理建模初学者指南\3.3.7.svg")
 # eps、svg文件可以用Inkscape或Xfig等开源矢量图应用打开并修改
 # 但标题、坐标轴标签等文本难以被其他应用编辑
 # matplotlib.rcParams['svg.fonttype']='none'或
