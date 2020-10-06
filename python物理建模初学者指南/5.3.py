@@ -5,7 +5,7 @@ Created on Tue Oct  6 23:06:04 2020
 @author: w'm'h
 """
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 from numpy.random import random as rng
 data = rng(1000)
 plt.figure()
@@ -42,4 +42,13 @@ bin_size = bin_edges[1] - bin_edges[0]
 # 宽度与高度成正比
 new_widths = bin_size * counts / counts.max()
 plt.bar(bin_edges[:-1], counts, width=new_widths, color=['r', 'g', 'b'])
+# 不指定分组个数，只指定每个分组所容纳的值的区间范围
+plt.figure()
+# 生成1/128，1/64，1/32，1/16，1/8，1/4，1/2，1的区间
+log2bins = np.logspace(-8, 0, num=9, base=2)
+print(log2bins)
+# 消除误差
+log2bins[0] = 0.0
+print(log2bins)
+plt.hist(data, bins=log2bins)
 plt.show()
