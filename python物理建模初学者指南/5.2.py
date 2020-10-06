@@ -41,6 +41,7 @@ def get_trajectory(num_steps):
     ax.set_ylabel("Y")
     plt.axis('equal')
     plt.plot(X_steps, Y_steps)
+    plt.show()
 
 
 get_trajectory(500)

@@ -5,9 +5,9 @@ Created on Tue Oct  6 23:06:04 2020
 @author: w'm'h
 """
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from numpy.random import random as rng
-data=rng(1000)
+data = rng(1000)
 plt.figure()
 """
 plt.hist(数组, 缺省参数列表)
@@ -41,4 +41,5 @@ plt.figure()
 bin_size = bin_edges[1] - bin_edges[0]
 # 宽度与高度成正比
 new_widths = bin_size * counts / counts.max()
-plt.bar(bin_edges[:-1], counts, width = new_widths, color = ['r', 'g', 'b'])
+plt.bar(bin_edges[:-1], counts, width=new_widths, color=['r', 'g', 'b'])
+plt.show()
