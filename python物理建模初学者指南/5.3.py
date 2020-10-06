@@ -5,7 +5,7 @@ Created on Tue Oct  6 23:06:04 2020
 @author: w'm'h
 """
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from numpy.random import random as rng
 data = rng(1000)
 plt.figure()
