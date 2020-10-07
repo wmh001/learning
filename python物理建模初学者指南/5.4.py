@@ -65,4 +65,11 @@ ax.plot_surface(X, Y, Z, rstride=1, cstride=1)
 
 ax0 = Axes3D(plt.figure())
 ax0.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.cm.gray)
+# z=x^2+y^2
+x = np.linspace(-1, 1, 11)
+y = np.linspace(-1, 1, 11)
+X, Y = np.meshgrid(x, y)
+Z = X * X + Y * Y
+ax1 = Axes3D(plt.figure())
+ax1.plot_surface(X, Y, Z)
 plt.show()
