@@ -36,9 +36,9 @@ def g(x):
 print(so.fsolve(np.sin, 1))
 # 数组误差问题，由于python表示的小数位有限，只能计算出一个近似值
 print(so.fsolve(g, 1, maxfev=10000))
+
+
 # 使用搜索含有奇点函数根时会产生严重错误
-
-
 def h(x):
     return 1 / (x - 1)
 
@@ -47,10 +47,9 @@ print(so.fsolve(h, 2))
 # full_output参数提供更多信息，返回值的同时返回更多信息，信息的最后一句标明了求值正确或求得错误值的一个原因
 print(so.fsolve(h, 2, full_output=True))
 
+
 # 多项式的复数根
 # fsolve只求实数根
-
-
 def J(x):
     return x * (1 + x**3) - 1
 
