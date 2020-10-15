@@ -1,0 +1,467 @@
+<html>
+<head>
+</head>
+<body>
+
+<script language="Javascript">
+<!---
+var num_images_movie = 100;
+var img_width_movie = 800;
+var img_height_movie = 600;
+var interval_movie = 40;
+var images_movie = new Array();
+
+function preload_images_movie()
+{
+   t = document.getElementById("progress");
+
+   t.innerHTML = "Preloading image ";
+   images_movie[0] = new Image(img_width_movie, img_height_movie);
+   images_movie[0].src = "000_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[1] = new Image(img_width_movie, img_height_movie);
+   images_movie[1].src = "001_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[2] = new Image(img_width_movie, img_height_movie);
+   images_movie[2].src = "002_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[3] = new Image(img_width_movie, img_height_movie);
+   images_movie[3].src = "003_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[4] = new Image(img_width_movie, img_height_movie);
+   images_movie[4].src = "004_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[5] = new Image(img_width_movie, img_height_movie);
+   images_movie[5].src = "005_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[6] = new Image(img_width_movie, img_height_movie);
+   images_movie[6].src = "006_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[7] = new Image(img_width_movie, img_height_movie);
+   images_movie[7].src = "007_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[8] = new Image(img_width_movie, img_height_movie);
+   images_movie[8].src = "008_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[9] = new Image(img_width_movie, img_height_movie);
+   images_movie[9].src = "009_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[10] = new Image(img_width_movie, img_height_movie);
+   images_movie[10].src = "010_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[11] = new Image(img_width_movie, img_height_movie);
+   images_movie[11].src = "011_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[12] = new Image(img_width_movie, img_height_movie);
+   images_movie[12].src = "012_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[13] = new Image(img_width_movie, img_height_movie);
+   images_movie[13].src = "013_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[14] = new Image(img_width_movie, img_height_movie);
+   images_movie[14].src = "014_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[15] = new Image(img_width_movie, img_height_movie);
+   images_movie[15].src = "015_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[16] = new Image(img_width_movie, img_height_movie);
+   images_movie[16].src = "016_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[17] = new Image(img_width_movie, img_height_movie);
+   images_movie[17].src = "017_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[18] = new Image(img_width_movie, img_height_movie);
+   images_movie[18].src = "018_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[19] = new Image(img_width_movie, img_height_movie);
+   images_movie[19].src = "019_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[20] = new Image(img_width_movie, img_height_movie);
+   images_movie[20].src = "020_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[21] = new Image(img_width_movie, img_height_movie);
+   images_movie[21].src = "021_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[22] = new Image(img_width_movie, img_height_movie);
+   images_movie[22].src = "022_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[23] = new Image(img_width_movie, img_height_movie);
+   images_movie[23].src = "023_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[24] = new Image(img_width_movie, img_height_movie);
+   images_movie[24].src = "024_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[25] = new Image(img_width_movie, img_height_movie);
+   images_movie[25].src = "025_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[26] = new Image(img_width_movie, img_height_movie);
+   images_movie[26].src = "026_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[27] = new Image(img_width_movie, img_height_movie);
+   images_movie[27].src = "027_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[28] = new Image(img_width_movie, img_height_movie);
+   images_movie[28].src = "028_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[29] = new Image(img_width_movie, img_height_movie);
+   images_movie[29].src = "029_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[30] = new Image(img_width_movie, img_height_movie);
+   images_movie[30].src = "030_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[31] = new Image(img_width_movie, img_height_movie);
+   images_movie[31].src = "031_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[32] = new Image(img_width_movie, img_height_movie);
+   images_movie[32].src = "032_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[33] = new Image(img_width_movie, img_height_movie);
+   images_movie[33].src = "033_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[34] = new Image(img_width_movie, img_height_movie);
+   images_movie[34].src = "034_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[35] = new Image(img_width_movie, img_height_movie);
+   images_movie[35].src = "035_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[36] = new Image(img_width_movie, img_height_movie);
+   images_movie[36].src = "036_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[37] = new Image(img_width_movie, img_height_movie);
+   images_movie[37].src = "037_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[38] = new Image(img_width_movie, img_height_movie);
+   images_movie[38].src = "038_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[39] = new Image(img_width_movie, img_height_movie);
+   images_movie[39].src = "039_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[40] = new Image(img_width_movie, img_height_movie);
+   images_movie[40].src = "040_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[41] = new Image(img_width_movie, img_height_movie);
+   images_movie[41].src = "041_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[42] = new Image(img_width_movie, img_height_movie);
+   images_movie[42].src = "042_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[43] = new Image(img_width_movie, img_height_movie);
+   images_movie[43].src = "043_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[44] = new Image(img_width_movie, img_height_movie);
+   images_movie[44].src = "044_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[45] = new Image(img_width_movie, img_height_movie);
+   images_movie[45].src = "045_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[46] = new Image(img_width_movie, img_height_movie);
+   images_movie[46].src = "046_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[47] = new Image(img_width_movie, img_height_movie);
+   images_movie[47].src = "047_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[48] = new Image(img_width_movie, img_height_movie);
+   images_movie[48].src = "048_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[49] = new Image(img_width_movie, img_height_movie);
+   images_movie[49].src = "049_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[50] = new Image(img_width_movie, img_height_movie);
+   images_movie[50].src = "050_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[51] = new Image(img_width_movie, img_height_movie);
+   images_movie[51].src = "051_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[52] = new Image(img_width_movie, img_height_movie);
+   images_movie[52].src = "052_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[53] = new Image(img_width_movie, img_height_movie);
+   images_movie[53].src = "053_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[54] = new Image(img_width_movie, img_height_movie);
+   images_movie[54].src = "054_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[55] = new Image(img_width_movie, img_height_movie);
+   images_movie[55].src = "055_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[56] = new Image(img_width_movie, img_height_movie);
+   images_movie[56].src = "056_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[57] = new Image(img_width_movie, img_height_movie);
+   images_movie[57].src = "057_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[58] = new Image(img_width_movie, img_height_movie);
+   images_movie[58].src = "058_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[59] = new Image(img_width_movie, img_height_movie);
+   images_movie[59].src = "059_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[60] = new Image(img_width_movie, img_height_movie);
+   images_movie[60].src = "060_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[61] = new Image(img_width_movie, img_height_movie);
+   images_movie[61].src = "061_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[62] = new Image(img_width_movie, img_height_movie);
+   images_movie[62].src = "062_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[63] = new Image(img_width_movie, img_height_movie);
+   images_movie[63].src = "063_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[64] = new Image(img_width_movie, img_height_movie);
+   images_movie[64].src = "064_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[65] = new Image(img_width_movie, img_height_movie);
+   images_movie[65].src = "065_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[66] = new Image(img_width_movie, img_height_movie);
+   images_movie[66].src = "066_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[67] = new Image(img_width_movie, img_height_movie);
+   images_movie[67].src = "067_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[68] = new Image(img_width_movie, img_height_movie);
+   images_movie[68].src = "068_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[69] = new Image(img_width_movie, img_height_movie);
+   images_movie[69].src = "069_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[70] = new Image(img_width_movie, img_height_movie);
+   images_movie[70].src = "070_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[71] = new Image(img_width_movie, img_height_movie);
+   images_movie[71].src = "071_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[72] = new Image(img_width_movie, img_height_movie);
+   images_movie[72].src = "072_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[73] = new Image(img_width_movie, img_height_movie);
+   images_movie[73].src = "073_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[74] = new Image(img_width_movie, img_height_movie);
+   images_movie[74].src = "074_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[75] = new Image(img_width_movie, img_height_movie);
+   images_movie[75].src = "075_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[76] = new Image(img_width_movie, img_height_movie);
+   images_movie[76].src = "076_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[77] = new Image(img_width_movie, img_height_movie);
+   images_movie[77].src = "077_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[78] = new Image(img_width_movie, img_height_movie);
+   images_movie[78].src = "078_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[79] = new Image(img_width_movie, img_height_movie);
+   images_movie[79].src = "079_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[80] = new Image(img_width_movie, img_height_movie);
+   images_movie[80].src = "080_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[81] = new Image(img_width_movie, img_height_movie);
+   images_movie[81].src = "081_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[82] = new Image(img_width_movie, img_height_movie);
+   images_movie[82].src = "082_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[83] = new Image(img_width_movie, img_height_movie);
+   images_movie[83].src = "083_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[84] = new Image(img_width_movie, img_height_movie);
+   images_movie[84].src = "084_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[85] = new Image(img_width_movie, img_height_movie);
+   images_movie[85].src = "085_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[86] = new Image(img_width_movie, img_height_movie);
+   images_movie[86].src = "086_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[87] = new Image(img_width_movie, img_height_movie);
+   images_movie[87].src = "087_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[88] = new Image(img_width_movie, img_height_movie);
+   images_movie[88].src = "088_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[89] = new Image(img_width_movie, img_height_movie);
+   images_movie[89].src = "089_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[90] = new Image(img_width_movie, img_height_movie);
+   images_movie[90].src = "090_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[91] = new Image(img_width_movie, img_height_movie);
+   images_movie[91].src = "091_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[92] = new Image(img_width_movie, img_height_movie);
+   images_movie[92].src = "092_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[93] = new Image(img_width_movie, img_height_movie);
+   images_movie[93].src = "093_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[94] = new Image(img_width_movie, img_height_movie);
+   images_movie[94].src = "094_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[95] = new Image(img_width_movie, img_height_movie);
+   images_movie[95].src = "095_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[96] = new Image(img_width_movie, img_height_movie);
+   images_movie[96].src = "096_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[97] = new Image(img_width_movie, img_height_movie);
+   images_movie[97].src = "097_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[98] = new Image(img_width_movie, img_height_movie);
+   images_movie[98].src = "098_movie.jpg";
+        
+   t.innerHTML = "Preloading image ";
+   images_movie[99] = new Image(img_width_movie, img_height_movie);
+   images_movie[99].src = "099_movie.jpg";
+        
+   t.innerHTML = "";
+}
+
+function tick_movie()
+{
+   if (frame_movie > num_images_movie - 1)
+       frame_movie = 0;
+
+   document.name_movie.src = images_movie[frame_movie].src;
+   frame_movie += 1;
+   tt = setTimeout("tick_movie()", interval_movie);
+}
+
+function startup_movie()
+{
+   preload_images_movie();
+   frame_movie = 0;
+   setTimeout("tick_movie()", interval_movie);
+}
+
+function stopit_movie()
+{ clearTimeout(tt); }
+
+function restart_movie()
+{ tt = setTimeout("tick_movie()", interval_movie); }
+
+function slower_movie()
+{ interval_movie = interval_movie/0.707; }
+
+function faster_movie()
+{ interval_movie = interval_movie*0.707; }
+
+// --->
+</script>
+
+<form>
+&nbsp;
+<input type="button" value="Start movie" onClick="startup_movie()">
+<input type="button" value="Pause movie" onClick="stopit_movie()">
+<input type="button" value="Resume movie" onClick="restart_movie()">
+&nbsp;
+<input type="button" value="Slower" onClick="slower_movie()">
+<input type="button" value="Faster" onClick="faster_movie()">
+</form>
+
+<p><div ID="progress"></div></p>
+<img src="000_movie.jpg" name="name_movie" border=2/>
+
+</body>
+</html>
