@@ -30,3 +30,12 @@ elif age < 65:
     print("Your admission cost is $10.")
 elif age > 65:
     print("Your admission cost is $5.")
+# 测试多个条件
+requested_toppings = ['mushrooms', 'extra cheese']
+if 'mushrooms' in requested_toppings:
+    print('Adding mushrooms.')
+if 'pepperoni' in requested_toppings:
+    print('Adding pepperoni.')
+if 'extra cheese' in requested_toppings:
+    print('Adding extra cheese.')
+print("\nFinishing making your pizza!")
