@@ -2,13 +2,13 @@
 cars = ['bmw', 'audi', 'toyota', 'subaru']
 cars.sort()
 print(cars)
-# .sort(reverse=True)永久逆向排序
+# .sort(reverse=True)永久逆序
 cars.sort(reverse=True)
 print(cars)
-# sort()临时排序
+# sort()临时字典排序
 print(sorted(cars))
 print(cars)
-# sorted(reverse=True)临时逆向排序
+# sorted(reverse=True)临时逆序
 cars.sort()
 print(sorted(cars, reverse=True))
 print(cars)
