@@ -21,3 +21,30 @@ for name, language in favorite_languages.items():
         name.title() + "'s favorite language is " +
         language.title() +
         ".")
+
+# 遍历字典中的所有键
+# 字典.keys()返回键列表
+for name in favorite_languages.keys():
+    print(name.title())
+
+# 缺省时，默认遍历键
+for name in favorite_languages:
+    print(name.title())
+
+# 遍历时，对于选定键施加特殊处理
+friends = ['phil', 'sarah']
+for name in favorite_languages.keys():
+    print(name.title())
+
+    if name in friends:
+        print("  Hi " + name.title() +
+              ", I see your favorite language is "
+              + favorite_languages[name].title())
+
+if 'erin' not in favorite_languages.keys():
+    print("Erin, please take our poll")
+
+# 按顺序遍历
+# sorted(列表)返回排序后的列表
+for name in sorted(favorite_languages.keys()):
+    print(name.title() + ", thank you for taking the poll.")
