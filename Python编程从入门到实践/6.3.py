@@ -10,12 +10,14 @@ user_0 = {
 for key, value in user_0.items():
     print("\nKey: " + key)
     print("Value" + value)
+
 favorite_languages = {
     'jen': 'python',
     'sarah': 'c',
     'edward': 'rudy',
     'phil': 'python',
 }
+
 for name, language in favorite_languages.items():
     print(
         name.title() + "'s favorite language is " +
@@ -44,7 +46,16 @@ for name in favorite_languages.keys():
 if 'erin' not in favorite_languages.keys():
     print("Erin, please take our poll")
 
-# 按顺序遍历
+# 按键顺序遍历
 # sorted(列表)返回排序后的列表
 for name in sorted(favorite_languages.keys()):
     print(name.title() + ", thank you for taking the poll.")
+
+# 遍历值
+print("The follow languages have been mentioned:")
+for language in favorite_languages.values():
+    print(language.title())
+
+# 遍历但除去重复值，顺序不定
+for language in set(favorite_languages.values()):
+    print(language.title())
