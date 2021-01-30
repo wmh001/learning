@@ -14,3 +14,13 @@ while message != 'quit':
     message = input(prompt)
     if message != 'quit':
         print(message)
+
+# 使用标志
+actice = True
+while actice:
+    message = input(prompt)
+
+    if message == 'quit':
+        actice = False
+    else:
+        print(message)
