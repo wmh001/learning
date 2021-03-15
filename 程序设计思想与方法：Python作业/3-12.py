@@ -1,13 +1,21 @@
 while True:
-    weight = input("请输入体重（单位：千克）：")
-    Weight = float(weight)
+    try:
+        weight = input("请输入体重（单位：千克）：")
+        Weight = float(weight)
+    except ValueError:
+        print("请输入数字！")
+        continue
     if Weight > 0:
         break
     else:
         print("请输入正数！")
 while True:
-    height = input("请输入身高（单位：米）：")
-    Height = float(height)
+    try:
+        height = input("请输入身高（单位：米）：")
+        Height = float(height)
+    except ValueError:
+        print("请输入数字！")
+        continue
     if Height > 0:
         break
     else:
