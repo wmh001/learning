@@ -5,7 +5,7 @@ print(cars)
 # .sort(reverse=True)永久逆序
 cars.sort(reverse=True)
 print(cars)
-# sort()临时字典排序
+# sorted()临时字典排序
 print(sorted(cars))
 print(cars)
 # sorted(reverse=True)临时逆序
