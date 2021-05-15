@@ -1,3 +1,5 @@
+# -*-coding:utf-8-*-
+
 import tkinter
 """
 图像 = PhotoImage(file=.gif图像文件名)创建图像对象
