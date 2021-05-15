@@ -51,10 +51,13 @@ c.delete(r2)
 """
 c.move(1, 50, 50)
 """
-画布.itemconfig(图形标识号, 选项=值, ...)
+画布.itemconfig(图形标识号, 选项=值, ...)设置选项
 """
 c.itemconfig(r1, fill="red")
 c.itemconfig('rect#2', outline='green')
+"""
+画布.itemcget(图形标识号, '选项名', ...)获取选项的值
+"""
 """
 画布.create_oval(左上角横坐标, 左上角纵坐标, 右下角横坐标, 右下角纵坐标, 选项=值, ...)画左上角和右下角矩形中的内接椭圆
 边框颜色：outline=字符串，默认'black'
