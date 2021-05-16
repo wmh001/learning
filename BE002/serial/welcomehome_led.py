@@ -28,7 +28,7 @@ while True:
     pos = mc.player.getTilePos()
     mc.postToChat("please goto home x=-30 y=-6 z=-40 for 15s to fly")
     mc.postToChat("x:" + str(pos.x) + "y:" + str(pos.y) + "z:" + str(pos.z))
-    #检测四周的9块区域是否有亮的红石灯
+    # 检测四周的9块区域是否有亮的红石灯
     for x in range(3):
         for z in range(3):
             if mc.getBlock(pos.x - 1 + x, pos.y, pos.z - 1 + z) == 124:
@@ -37,14 +37,14 @@ while True:
     if pos.x == -30 and pos.y == -6 and pos.z == -40:
         mc.postToChat("welcome home")
         stayed_time = stayed_time + 1
-        #回到家给串口送一个y，arduino收到串口点亮一盏led
+        # 回到家给串口送一个y，arduino收到串口点亮一盏led
         ser.write("y".encode())
         print("y send")
         time.sleep(1)
         if stayed_time >= 30:
             mc.player.setTilePos(-30, 10, -40)
             stayed_time = 0
-            #回到家给串口送一个g，arduino收到串口点亮另一盏led
+            # 回到家给串口送一个g，arduino收到串口点亮另一盏led
             ser.write("g".encode())
             print("g send")
             time.sleep(1)
