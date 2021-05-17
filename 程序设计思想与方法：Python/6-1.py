@@ -2,7 +2,7 @@
 # 包括str,list,tuple
 
 # 通用的序列操作
-# s1 + s2
+# s1 + s2 序列相拼接
 # n * s1 或s1 * n
 # s[i],s[i:j],s[i:j:k]
 # len(s)
