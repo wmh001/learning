@@ -130,6 +130,7 @@ class Car:
         for n, d in [(784, 1000), (784, 500), (880, 500), (587, 2000),
                      (523, 1000), (523, 500), (440, 500), (587, 2000)]:
             winsound.Beep(n, d)
+        winsound.PlaySound("程序设计思想与方法：Python\\win.wav", winsound.SND_FILENAME)
 
 
 Car('Jetta')
