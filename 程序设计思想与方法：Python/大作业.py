@@ -2,8 +2,6 @@
 
 import tkinter
 
-# entry_width = 35
-
 
 class deflectionEquationCalculator:
     def __init__(self):
