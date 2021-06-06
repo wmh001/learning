@@ -7,7 +7,7 @@ class deflectionEquationCalculator:
     def __init__(self):
         self.root = tkinter.Tk()
         self.root.title("弯矩方程计算器")
-        self.root.geometry("950x400")
+        self.root.geometry("950x250")
         self.entry_width = 50
         self.label_width = 40
 
@@ -25,11 +25,15 @@ class deflectionEquationCalculator:
         self.cantilever_beam_type_meun.add_command(
             label="受端力", command=self.cantilever_beam_power_interface)
         self.cantilever_beam_type_meun.add_command(
-            label="均布载荷", command=self.cantilever_beam_UL_interface)
+            label="受均布载荷", command=self.cantilever_beam_UL_interface)
         self.beam_type_meun.add_cascade(label="简支梁",
                                         menu=self.simple_beam_type_meun)
         self.simple_beam_type_meun.add_command(
             label="受力矩", command=self.simple_beam_moment_interface)
+        self.simple_beam_type_meun.add_command(
+            label="受力", command=self.simple_beam_power_interface)
+        self.simple_beam_type_meun.add_command(
+            label="受均布载荷", command=self.simple_beam_UL_interface)
         self.meun.add_cascade(label="帮助", menu=self.help_meun)
         self.help_meun.add_command(label="教程", command=self.course)
         self.help_meun.add_command(label="关于", command=self.about)
@@ -39,6 +43,7 @@ class deflectionEquationCalculator:
         self.initial_text.config(font=("宋体", 20))
         self.initial_text.pack()
 
+        # 悬臂梁力矩
         self.cantilever_beam_moment_list = []
 
         self.cantilever_beam_moment_M_label = tkinter.Label(
@@ -132,6 +137,7 @@ class deflectionEquationCalculator:
         self.cantilever_beam_moment_list.append(
             self.cantilever_beam_moment_canvas)
 
+        # 悬臂梁力
         self.cantilever_beam_power_list = []
 
         self.cantilever_beam_power_F_label = tkinter.Label(
@@ -223,6 +229,7 @@ class deflectionEquationCalculator:
         self.cantilever_beam_power_list.append(
             self.cantilever_beam_power_canvas)
 
+        # 悬臂梁均布
         self.cantilever_beam_UL_list = []
 
         self.cantilever_beam_UL_q_label = tkinter.Label(
@@ -302,6 +309,7 @@ class deflectionEquationCalculator:
                                                         bg="white")
         self.cantilever_beam_UL_list.append(self.cantilever_beam_UL_canvas)
 
+        # 简支梁力矩
         self.simple_beam_moment_list = []
 
         self.simple_beam_moment_M_label = tkinter.Label(
@@ -380,7 +388,7 @@ class deflectionEquationCalculator:
         self.simple_beam_moment_list.append(self.simple_beam_moment_w_entry2)
 
         self.simple_beam_moment_angleA_label = tkinter.Label(
-            self.root, text="端截面转角(单位为弧度)：")
+            self.root, text="左端截面转角(单位为弧度)：")
         self.simple_beam_moment_list.append(
             self.simple_beam_moment_angleA_label)
         self.simple_beam_moment_angleA_val = tkinter.StringVar()
@@ -393,7 +401,7 @@ class deflectionEquationCalculator:
             self.simple_beam_moment_angleA_entry)
 
         self.simple_beam_moment_angleB_label = tkinter.Label(
-            self.root, text="端截面转角(单位为弧度)：")
+            self.root, text="右端截面转角(单位为弧度)：")
         self.simple_beam_moment_list.append(
             self.simple_beam_moment_angleB_label)
         self.simple_beam_moment_angleB_val = tkinter.StringVar()
@@ -411,11 +419,221 @@ class deflectionEquationCalculator:
                                                         bg="white")
         self.simple_beam_moment_list.append(self.simple_beam_moment_canvas)
 
+        # 简支梁力
+        self.simple_beam_power_list = []
+
+        self.simple_beam_power_F_label = tkinter.Label(self.root,
+                                                       text="力(单位为N，向下为正方向)=",
+                                                       width=self.label_width,
+                                                       anchor='e')
+        self.simple_beam_power_list.append(self.simple_beam_power_F_label)
+        self.simple_beam_power_F_val = tkinter.StringVar()
+        self.simple_beam_power_F_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_F_val,
+            width=self.entry_width)
+        self.simple_beam_power_list.append(self.simple_beam_power_F_entry)
+
+        self.simple_beam_power_E_label = tkinter.Label(self.root,
+                                                       text="弹性模量(单位为GPa)=")
+        self.simple_beam_power_list.append(self.simple_beam_power_E_label)
+        self.simple_beam_power_E_val = tkinter.StringVar()
+        self.simple_beam_power_E_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_E_val,
+            width=self.entry_width)
+        self.simple_beam_power_list.append(self.simple_beam_power_E_entry)
+
+        self.simple_beam_power_I_label = tkinter.Label(
+            self.root, text="关于中性轴的惯性矩(单位为cm^4)=")
+        self.simple_beam_power_list.append(self.simple_beam_power_I_label)
+        self.simple_beam_power_I_val = tkinter.StringVar()
+        self.simple_beam_power_I_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_I_val,
+            width=self.entry_width)
+        self.simple_beam_power_list.append(self.simple_beam_power_I_entry)
+
+        self.simple_beam_power_l_label = tkinter.Label(self.root,
+                                                       text="梁长(单位为m)=")
+        self.simple_beam_power_list.append(self.simple_beam_power_l_label)
+        self.simple_beam_power_l_val = tkinter.StringVar()
+        self.simple_beam_power_l_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_l_val,
+            width=self.entry_width)
+        self.simple_beam_power_list.append(self.simple_beam_power_l_entry)
+
+        self.simple_beam_power_a_label = tkinter.Label(self.root,
+                                                       text="受力点到左端的距离(单位为m)=")
+        self.simple_beam_power_list.append(self.simple_beam_power_a_label)
+        self.simple_beam_power_a_val = tkinter.StringVar()
+        self.simple_beam_power_a_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_a_val,
+            width=self.entry_width)
+        self.simple_beam_power_list.append(self.simple_beam_power_a_entry)
+
+        self.simple_beam_power_button = tkinter.Button(
+            self.root, text="确定", command=self.simple_beam_power_determine)
+        self.simple_beam_power_list.append(self.simple_beam_power_button)
+
+        self.simple_beam_power_w_label = tkinter.Label(self.root,
+                                                       text="挠度方程(单位为m)：")
+        self.simple_beam_power_list.append(self.simple_beam_power_w_label)
+        self.simple_beam_power_w_val = tkinter.StringVar()
+        self.simple_beam_power_w_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_w_val,
+            width=self.entry_width)
+        self.simple_beam_power_w_entry.config(state='readonly')
+        self.simple_beam_power_list.append(self.simple_beam_power_w_entry)
+        self.simple_beam_power_w_val2 = tkinter.StringVar()
+        self.simple_beam_power_w_entry2 = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_w_val2,
+            width=self.entry_width)
+        self.simple_beam_power_w_entry2.config(state='readonly')
+        self.simple_beam_power_list.append(self.simple_beam_power_w_entry2)
+
+        self.simple_beam_power_angleA_label = tkinter.Label(
+            self.root, text="左端截面转角(单位为弧度)：")
+        self.simple_beam_power_list.append(self.simple_beam_power_angleA_label)
+        self.simple_beam_power_angleA_val = tkinter.StringVar()
+        self.simple_beam_power_angleA_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_angleA_val,
+            width=self.entry_width)
+        self.simple_beam_power_angleA_entry.config(state='readonly')
+        self.simple_beam_power_list.append(self.simple_beam_power_angleA_entry)
+
+        self.simple_beam_power_angleB_label = tkinter.Label(
+            self.root, text="右端截面转角(单位为弧度)：")
+        self.simple_beam_power_list.append(self.simple_beam_power_angleB_label)
+        self.simple_beam_power_angleB_val = tkinter.StringVar()
+        self.simple_beam_power_angleB_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_power_angleB_val,
+            width=self.entry_width)
+        self.simple_beam_power_angleB_entry.config(state='readonly')
+        self.simple_beam_power_list.append(self.simple_beam_power_angleB_entry)
+
+        self.simple_beam_power_canvas = tkinter.Canvas(self.root,
+                                                       width=300,
+                                                       height=161,
+                                                       bg="white")
+        self.simple_beam_power_list.append(self.simple_beam_power_canvas)
+
+        # 简支梁均布
+        self.simple_beam_UL_list = []
+
+        self.simple_beam_UL_q_label = tkinter.Label(
+            self.root,
+            text="均布载荷集度(单位为N*m^(-1))，向下为正方向)=",
+            width=self.label_width,
+            anchor='e')
+        self.simple_beam_UL_list.append(self.simple_beam_UL_q_label)
+        self.simple_beam_UL_q_val = tkinter.StringVar()
+        self.simple_beam_UL_q_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_q_val,
+            width=self.entry_width)
+        self.simple_beam_UL_list.append(self.simple_beam_UL_q_entry)
+
+        self.simple_beam_UL_E_label = tkinter.Label(self.root,
+                                                    text="弹性模量(单位为GPa)=")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_E_label)
+        self.simple_beam_UL_E_val = tkinter.StringVar()
+        self.simple_beam_UL_E_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_E_val,
+            width=self.entry_width)
+        self.simple_beam_UL_list.append(self.simple_beam_UL_E_entry)
+
+        self.simple_beam_UL_I_label = tkinter.Label(self.root,
+                                                    text="关于中性轴的惯性矩(单位为cm^4)=")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_I_label)
+        self.simple_beam_UL_I_val = tkinter.StringVar()
+        self.simple_beam_UL_I_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_I_val,
+            width=self.entry_width)
+        self.simple_beam_UL_list.append(self.simple_beam_UL_I_entry)
+
+        self.simple_beam_UL_l_label = tkinter.Label(self.root,
+                                                    text="梁长(单位为m)=")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_l_label)
+        self.simple_beam_UL_l_val = tkinter.StringVar()
+        self.simple_beam_UL_l_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_l_val,
+            width=self.entry_width)
+        self.simple_beam_UL_list.append(self.simple_beam_UL_l_entry)
+
+        self.simple_beam_UL_button = tkinter.Button(
+            self.root, text="确定", command=self.simple_beam_UL_determine)
+        self.simple_beam_UL_list.append(self.simple_beam_UL_button)
+
+        self.simple_beam_UL_w_label = tkinter.Label(self.root,
+                                                    text="挠度方程(单位为m)：")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_w_label)
+        self.simple_beam_UL_w_val = tkinter.StringVar()
+        self.simple_beam_UL_w_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_w_val,
+            width=self.entry_width)
+        self.simple_beam_UL_w_entry.config(state='readonly')
+        self.simple_beam_UL_list.append(self.simple_beam_UL_w_entry)
+
+        self.simple_beam_UL_angleA_label = tkinter.Label(self.root,
+                                                         text="左端截面转角(单位为弧度)：")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_angleA_label)
+        self.simple_beam_UL_angleA_val = tkinter.StringVar()
+        self.simple_beam_UL_angleA_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_angleA_val,
+            width=self.entry_width)
+        self.simple_beam_UL_angleA_entry.config(state='readonly')
+        self.simple_beam_UL_list.append(self.simple_beam_UL_angleA_entry)
+
+        self.simple_beam_UL_angleB_label = tkinter.Label(self.root,
+                                                         text="右端截面转角(单位为弧度)：")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_angleB_label)
+        self.simple_beam_UL_angleB_val = tkinter.StringVar()
+        self.simple_beam_UL_angleB_entry = tkinter.Entry(
+            self.root,
+            textvariable=self.simple_beam_UL_angleB_val,
+            width=self.entry_width)
+        self.simple_beam_UL_angleB_entry.config(state='readonly')
+        self.simple_beam_UL_list.append(self.simple_beam_UL_angleB_entry)
+
+        self.simple_beam_UL_canvas = tkinter.Canvas(self.root,
+                                                    width=300,
+                                                    height=161,
+                                                    bg="white")
+        self.simple_beam_UL_list.append(self.simple_beam_UL_canvas)
+
         self.root.mainloop()
 
     def draw_cantilever_beam(self, self_canvas, x, y):
-        self_canvas.create_line(x, y - 20, x, y + 20)
+        self_canvas.create_line(x, y - 20, x, y + 20, width=3)
         self_canvas.create_line(x, y, x + 200, y)
+
+    def draw_simple_beam(self, self_canvas, x, y):
+        self_canvas.create_line(x, y, x + 200, y)
+        self_canvas.create_line(x - 5, y + 10, x, y, x + 5, y + 10)
+        self_canvas.create_polygon(x + 195,
+                                   y + 10,
+                                   x + 200,
+                                   y,
+                                   x + 205,
+                                   y + 10,
+                                   fill="white",
+                                   outline="black")
+        self_canvas.create_line(x - 10, y + 10, x + 10, y + 10, width=3)
+        self_canvas.create_oval(x + 193, y + 10, x + 197, y + 14)
+        self_canvas.create_oval(x + 203, y + 10, x + 207, y + 14)
+        self_canvas.create_line(x + 190, y + 14, x + 210, y + 14, width=3)
 
     def draw_moment(self, self_canvas, x, y):
         self_canvas.create_line(x, y - 20, x, y + 20)
@@ -446,6 +664,10 @@ class deflectionEquationCalculator:
             i.grid_forget()
         for i in self.simple_beam_moment_list:
             i.grid_forget()
+        for i in self.simple_beam_power_list:
+            i.grid_forget()
+        for i in self.simple_beam_UL_list:
+            i.grid_forget()
         self.cantilever_beam_moment_M_label.grid(row=0, column=0, sticky='E')
         self.cantilever_beam_moment_M_entry.grid(row=0, column=1, sticky='E')
         self.cantilever_beam_moment_M_val.set("1")
@@ -471,9 +693,18 @@ class deflectionEquationCalculator:
         self.cantilever_beam_moment_angle_val.set("")
         self.cantilever_beam_moment_canvas.grid(row=0, column=2, rowspan=7)
         self.cantilever_beam_moment_canvas.delete("all")
+        self.cantilever_beam_moment_canvas.create_text(150,
+                                                       160,
+                                                       text="示意图",
+                                                       anchor='s')
 
     def cantilever_beam_moment_determine(self):
         try:
+            self.cantilever_beam_moment_canvas.delete("all")
+            self.cantilever_beam_moment_canvas.create_text(150,
+                                                           160,
+                                                           text="示意图",
+                                                           anchor='s')
             coefficient_w = -float(self.cantilever_beam_moment_M_entry.get(
             )) / (2 * float(self.cantilever_beam_moment_E_entry.get()) * 10**9
                   * float(self.cantilever_beam_moment_I_entry.get()) / 10**8)
@@ -485,7 +716,7 @@ class deflectionEquationCalculator:
             self.draw_cantilever_beam(self.cantilever_beam_moment_canvas, 50,
                                       80)
             self.draw_moment(self.cantilever_beam_moment_canvas, 250, 80)
-        except ValueError:
+        except:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
             self.warning_top.title("警告")
@@ -503,6 +734,10 @@ class deflectionEquationCalculator:
         for i in self.cantilever_beam_UL_list:
             i.grid_forget()
         for i in self.simple_beam_moment_list:
+            i.grid_forget()
+        for i in self.simple_beam_power_list:
+            i.grid_forget()
+        for i in self.simple_beam_UL_list:
             i.grid_forget()
         self.cantilever_beam_power_F_label.grid(row=0, column=0, sticky='E')
         self.cantilever_beam_power_F_entry.grid(row=0, column=1, sticky='E')
@@ -529,9 +764,18 @@ class deflectionEquationCalculator:
         self.cantilever_beam_power_angle_val.set("")
         self.cantilever_beam_power_canvas.grid(row=0, column=2, rowspan=7)
         self.cantilever_beam_power_canvas.delete("all")
+        self.cantilever_beam_power_canvas.create_text(150,
+                                                      160,
+                                                      text="示意图",
+                                                      anchor='s')
 
     def cantilever_beam_power_determine(self):
         try:
+            self.cantilever_beam_power_canvas.delete("all")
+            self.cantilever_beam_power_canvas.create_text(150,
+                                                          160,
+                                                          text="示意图",
+                                                          anchor='s')
             coefficient_w = -float(self.cantilever_beam_power_F_entry.get(
             )) / (6 * float(self.cantilever_beam_power_E_entry.get()) * 10**9 *
                   float(self.cantilever_beam_power_I_entry.get()) / 10**8)
@@ -544,7 +788,7 @@ class deflectionEquationCalculator:
             self.draw_cantilever_beam(self.cantilever_beam_power_canvas, 50,
                                       80)
             self.draw_power(self.cantilever_beam_power_canvas, 250, 80)
-        except ValueError:
+        except:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
             self.warning_top.title("警告")
@@ -562,6 +806,10 @@ class deflectionEquationCalculator:
         for i in self.cantilever_beam_power_list:
             i.grid_forget()
         for i in self.simple_beam_moment_list:
+            i.grid_forget()
+        for i in self.simple_beam_power_list:
+            i.grid_forget()
+        for i in self.simple_beam_UL_list:
             i.grid_forget()
         self.cantilever_beam_UL_q_label.grid(row=0, column=0, sticky='E')
         self.cantilever_beam_UL_q_entry.grid(row=0, column=1, sticky='E')
@@ -584,9 +832,18 @@ class deflectionEquationCalculator:
         self.cantilever_beam_UL_angle_val.set("")
         self.cantilever_beam_UL_canvas.grid(row=0, column=2, rowspan=7)
         self.cantilever_beam_UL_canvas.delete("all")
+        self.cantilever_beam_UL_canvas.create_text(150,
+                                                   160,
+                                                   text="示意图",
+                                                   anchor='s')
 
     def cantilever_beam_UL_determine(self):
         try:
+            self.cantilever_beam_UL_canvas.delete("all")
+            self.cantilever_beam_UL_canvas.create_text(150,
+                                                       160,
+                                                       text="示意图",
+                                                       anchor='s')
             coefficient_w = -float(self.cantilever_beam_UL_q_entry.get()) / (
                 24 * float(self.cantilever_beam_UL_E_entry.get()) * 10**9 *
                 float(self.cantilever_beam_UL_I_entry.get()) / 10**8)
@@ -600,7 +857,7 @@ class deflectionEquationCalculator:
             self.cantilever_beam_UL_angle_val.set("%0.7f " % angle_B)
             self.draw_cantilever_beam(self.cantilever_beam_UL_canvas, 50, 80)
             self.draw_UL(self.cantilever_beam_UL_canvas, 50, 80)
-        except ValueError:
+        except:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
             self.warning_top.title("警告")
@@ -618,6 +875,10 @@ class deflectionEquationCalculator:
         for i in self.cantilever_beam_power_list:
             i.grid_forget()
         for i in self.cantilever_beam_UL_list:
+            i.grid_forget()
+        for i in self.simple_beam_power_list:
+            i.grid_forget()
+        for i in self.simple_beam_UL_list:
             i.grid_forget()
         self.simple_beam_moment_M_label.grid(row=0, column=0, sticky='E')
         self.simple_beam_moment_M_entry.grid(row=0, column=1, sticky='E')
@@ -648,20 +909,41 @@ class deflectionEquationCalculator:
         self.simple_beam_moment_angleB_val.set("")
         self.simple_beam_moment_canvas.grid(row=0, column=2, rowspan=7)
         self.simple_beam_moment_canvas.delete("all")
+        self.simple_beam_moment_canvas.create_text(150,
+                                                   160,
+                                                   text="示意图",
+                                                   anchor='s')
 
     def simple_beam_moment_determine(self):
         try:
+            self.simple_beam_moment_canvas.delete("all")
+            self.simple_beam_moment_canvas.create_text(150,
+                                                       160,
+                                                       text="示意图",
+                                                       anchor='s')
+            L = float(self.simple_beam_moment_l_entry.get())
+            a = float(self.simple_beam_moment_a_entry.get())
+            b = L - a
+            if a > L:
+                self.warning_top = tkinter.Toplevel()
+                self.warning_top.geometry("200x80")
+                self.warning_top.title("警告")
+                self.warning_label_1 = tkinter.Label(self.warning_top,
+                                                     text="!")
+                self.warning_label_1.config(font=("宋体", 40), fg="red")
+                self.warning_label_1.pack()
+                self.warning_label_2 = tkinter.Label(self.warning_top,
+                                                     text="输入值无法计算，请检查输入！")
+                self.warning_label_2.pack()
+                return
             coefficient_w = float(self.simple_beam_moment_M_entry.get()) / (
                 6 * float(self.simple_beam_moment_E_entry.get()) * 10**9 *
                 float(self.simple_beam_moment_I_entry.get()) / 10**8 *
                 float(self.simple_beam_moment_l_entry.get()))
-            L = float(self.simple_beam_moment_l_entry.get())
-            a = float(self.simple_beam_moment_a_entry.get())
-            b = L - a
             angle_A = coefficient_w * (L**2 - 3 * b**2)
             angle_B = coefficient_w * (L**2 - 3 * a**2)
-            self.simple_beam_moment_angleA_val.set("%0.7f " % abs(angle_A))
-            self.simple_beam_moment_angleB_val.set("%0.7f " % abs(angle_B))
+            self.simple_beam_moment_angleA_val.set("%0.7f " % angle_A)
+            self.simple_beam_moment_angleB_val.set("%0.7f " % angle_B)
             if a == 0:
                 self.simple_beam_moment_w_val.set(
                     "w=-%0.7f*x*(%0.2f-x)(%0.2f-x" % (coefficient_w, L, 2 * L))
@@ -677,10 +959,184 @@ class deflectionEquationCalculator:
                 self.simple_beam_moment_w_val2.set(
                     "w=%0.7f*(-x^3+%0.2f*(x-%0.2f)^2+%0.2f*x)(%0.2f≤x≤%0.2f)" %
                     (coefficient_w, 3 * L, a, L**2 - 3 * b**2, a, L))
-            """self.draw_simple_beam(self.simple_beam_moment_canvas, 50,
-                                      80)
-            self.draw_moment(self.cantilever_beam_moment_canvas, 250, 80)"""
-        except ValueError:
+            self.draw_simple_beam(self.simple_beam_moment_canvas, 50, 80)
+            self.draw_moment(self.simple_beam_moment_canvas, 50 + 200 * a / L,
+                             80)
+        except:
+            self.warning_top = tkinter.Toplevel()
+            self.warning_top.geometry("200x80")
+            self.warning_top.title("警告")
+            self.warning_label_1 = tkinter.Label(self.warning_top, text="!")
+            self.warning_label_1.config(font=("宋体", 40), fg="red")
+            self.warning_label_1.pack()
+            self.warning_label_2 = tkinter.Label(self.warning_top,
+                                                 text="输入值无法计算，请检查输入！")
+            self.warning_label_2.pack()
+
+    def simple_beam_power_interface(self):
+        self.initial_text.pack_forget()
+        for i in self.cantilever_beam_moment_list:
+            i.grid_forget()
+        for i in self.cantilever_beam_power_list:
+            i.grid_forget()
+        for i in self.cantilever_beam_UL_list:
+            i.grid_forget()
+        for i in self.simple_beam_moment_list:
+            i.grid_forget()
+        for i in self.simple_beam_UL_list:
+            i.grid_forget()
+        self.simple_beam_power_F_label.grid(row=0, column=0, sticky='E')
+        self.simple_beam_power_F_entry.grid(row=0, column=1, sticky='E')
+        self.simple_beam_power_F_val.set("1")
+        self.simple_beam_power_E_label.grid(row=1, column=0, sticky='E')
+        self.simple_beam_power_E_entry.grid(row=1, column=1, sticky='E')
+        self.simple_beam_power_E_val.set("1")
+        self.simple_beam_power_I_label.grid(row=2, column=0, sticky='E')
+        self.simple_beam_power_I_entry.grid(row=2, column=1, sticky='E')
+        self.simple_beam_power_I_val.set("1")
+        self.simple_beam_power_l_label.grid(row=3, column=0, sticky='E')
+        self.simple_beam_power_l_entry.grid(row=3, column=1, sticky='E')
+        self.simple_beam_power_l_val.set("1")
+        self.simple_beam_power_a_label.grid(row=4, column=0, sticky='E')
+        self.simple_beam_power_a_entry.grid(row=4, column=1, sticky='E')
+        self.simple_beam_power_a_val.set("1")
+        self.simple_beam_power_button.grid(row=5, column=0, columnspan=2)
+        self.simple_beam_power_w_label.grid(row=6, column=0, sticky='E')
+        self.simple_beam_power_w_entry.grid(row=6, column=1, sticky='E')
+        self.simple_beam_power_w_val.set("")
+        self.simple_beam_power_w_entry2.grid(row=7, column=1, sticky='E')
+        self.simple_beam_power_w_val2.set("")
+        self.simple_beam_power_angleA_label.grid(row=8, column=0, sticky='E')
+        self.simple_beam_power_angleA_entry.grid(row=8, column=1, sticky='E')
+        self.simple_beam_power_angleA_val.set("")
+        self.simple_beam_power_angleB_label.grid(row=9, column=0, sticky='E')
+        self.simple_beam_power_angleB_entry.grid(row=9, column=1, sticky='E')
+        self.simple_beam_power_angleB_val.set("")
+        self.simple_beam_power_canvas.grid(row=0, column=2, rowspan=7)
+        self.simple_beam_power_canvas.delete("all")
+        self.simple_beam_power_canvas.create_text(150,
+                                                  160,
+                                                  text="示意图",
+                                                  anchor='s')
+
+    def simple_beam_power_determine(self):
+        try:
+            self.simple_beam_power_canvas.delete("all")
+            self.simple_beam_power_canvas.create_text(150,
+                                                      160,
+                                                      text="示意图",
+                                                      anchor='s')
+            L = float(self.simple_beam_power_l_entry.get())
+            a = float(self.simple_beam_power_a_entry.get())
+            b = L - a
+            if a > L:
+                self.warning_top = tkinter.Toplevel()
+                self.warning_top.geometry("200x80")
+                self.warning_top.title("警告")
+                self.warning_label_1 = tkinter.Label(self.warning_top,
+                                                     text="!")
+                self.warning_label_1.config(font=("宋体", 40), fg="red")
+                self.warning_label_1.pack()
+                self.warning_label_2 = tkinter.Label(self.warning_top,
+                                                     text="输入值无法计算，请检查输入！")
+                self.warning_label_2.pack()
+                return
+            coefficient_w = -float(
+                self.simple_beam_power_F_entry.get()) * b / (
+                    6 * float(self.simple_beam_power_E_entry.get()) * 10**9 *
+                    float(self.simple_beam_power_I_entry.get()) / 10**8 * L)
+            angle_A = coefficient_w * a * (L + b)
+            angle_B = -coefficient_w * a * (L + a)
+            self.simple_beam_power_angleA_val.set("%0.7f " % angle_A)
+            self.simple_beam_power_angleB_val.set("%0.7f " % angle_B)
+            if a == 0:
+                self.simple_beam_power_w_val.set("w=0")
+                self.simple_beam_power_w_val2.set("-------------------------")
+            elif b == 0:
+                self.simple_beam_power_w_val.set("w=0")
+                self.simple_beam_power_w_val2.set("-------------------------")
+            else:
+                self.simple_beam_power_w_val.set(
+                    "w=%0.7f*x*(%0.2f-x^2)(0≤x≤%0.2f)" %
+                    (coefficient_w, L**2 - b**2, a))
+                self.simple_beam_power_w_val2.set(
+                    "w=%0.7f*(%0.2f(x-%0.2f)^3+%0.2f*x-x^3)(%0.2f≤x≤%0.2f)" %
+                    (coefficient_w, L / b, a, L**2 - b**2, a, L))
+            self.draw_simple_beam(self.simple_beam_power_canvas, 50, 80)
+            self.draw_power(self.simple_beam_power_canvas, 50 + 200 * a / L,
+                            80)
+        except:
+            self.warning_top = tkinter.Toplevel()
+            self.warning_top.geometry("200x80")
+            self.warning_top.title("警告")
+            self.warning_label_1 = tkinter.Label(self.warning_top, text="!")
+            self.warning_label_1.config(font=("宋体", 40), fg="red")
+            self.warning_label_1.pack()
+            self.warning_label_2 = tkinter.Label(self.warning_top,
+                                                 text="输入值无法计算，请检查输入！")
+            self.warning_label_2.pack()
+
+    def simple_beam_UL_interface(self):
+        self.initial_text.pack_forget()
+        for i in self.cantilever_beam_moment_list:
+            i.grid_forget()
+        for i in self.cantilever_beam_power_list:
+            i.grid_forget()
+        for i in self.cantilever_beam_UL_list:
+            i.grid_forget()
+        for i in self.simple_beam_moment_list:
+            i.grid_forget()
+        for i in self.simple_beam_power_list:
+            i.grid_forget()
+        self.simple_beam_UL_q_label.grid(row=0, column=0, sticky='E')
+        self.simple_beam_UL_q_entry.grid(row=0, column=1, sticky='E')
+        self.simple_beam_UL_q_val.set("1")
+        self.simple_beam_UL_E_label.grid(row=1, column=0, sticky='E')
+        self.simple_beam_UL_E_entry.grid(row=1, column=1, sticky='E')
+        self.simple_beam_UL_E_val.set("1")
+        self.simple_beam_UL_I_label.grid(row=2, column=0, sticky='E')
+        self.simple_beam_UL_I_entry.grid(row=2, column=1, sticky='E')
+        self.simple_beam_UL_I_val.set("1")
+        self.simple_beam_UL_l_label.grid(row=3, column=0, sticky='E')
+        self.simple_beam_UL_l_entry.grid(row=3, column=1, sticky='E')
+        self.simple_beam_UL_l_val.set("1")
+        self.simple_beam_UL_button.grid(row=5, column=0, columnspan=2)
+        self.simple_beam_UL_w_label.grid(row=6, column=0, sticky='E')
+        self.simple_beam_UL_w_entry.grid(row=6, column=1, sticky='E')
+        self.simple_beam_UL_w_val.set("")
+        self.simple_beam_UL_angleA_label.grid(row=8, column=0, sticky='E')
+        self.simple_beam_UL_angleA_entry.grid(row=8, column=1, sticky='E')
+        self.simple_beam_UL_angleA_val.set("")
+        self.simple_beam_UL_angleB_label.grid(row=9, column=0, sticky='E')
+        self.simple_beam_UL_angleB_entry.grid(row=9, column=1, sticky='E')
+        self.simple_beam_UL_angleB_val.set("")
+        self.simple_beam_UL_canvas.grid(row=0, column=2, rowspan=7)
+        self.simple_beam_UL_canvas.delete("all")
+        self.simple_beam_UL_canvas.create_text(150,
+                                               160,
+                                               text="示意图",
+                                               anchor='s')
+
+    def simple_beam_UL_determine(self):
+        try:
+            self.simple_beam_UL_canvas.delete("all")
+            self.simple_beam_UL_canvas.create_text(150,
+                                                   160,
+                                                   text="示意图",
+                                                   anchor='s')
+            L = float(self.simple_beam_UL_l_entry.get())
+            coefficient_w = -float(self.simple_beam_UL_q_entry.get()) / (
+                24 * float(self.simple_beam_UL_E_entry.get()) * 10**9 *
+                float(self.simple_beam_UL_I_entry.get()) / 10**8)
+            angle_A = coefficient_w * L**3
+            angle_B = -angle_A
+            self.simple_beam_UL_angleA_val.set("%0.7f " % angle_A)
+            self.simple_beam_UL_angleB_val.set("%0.7f " % angle_B)
+            self.simple_beam_UL_w_val.set("w=%0.7f*x*(%0.2f-%0.2f*x^2+x^3)" %
+                                          (coefficient_w, L**3, 2 * L))
+            self.draw_simple_beam(self.simple_beam_UL_canvas, 50, 80)
+            self.draw_UL(self.simple_beam_UL_canvas, 50, 80)
+        except:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
             self.warning_top.title("警告")
@@ -698,11 +1154,11 @@ class deflectionEquationCalculator:
             self.help_top,
             justify="left",
             text="使用步骤如下：\n1.从菜单栏中选择梁的种类和受力类型；\n2.输入受\
-力值、弹性模量、惯性矩等参数；\n3.点击确定按钮，从下面文本框读取挠度方程和端截面转\
-角。\n注：\n1.此处仅可以计算悬臂梁和简支梁模型，外伸梁可以基于这两种情况用叠加法计\
-算；\n2.由于此处解算进行了对称弯曲假设和纯弯曲假设，计算结果仅适用于横截面关于剪力\
-方向对称的细长梁；\n3.此处仅计算受力点在自由端或全梁受分布载荷等最基本情况，其他情\
-况可以根据端截面转角或叠加法方便地算出。")
+力值、弹性模量、惯性矩等参数；\n3.点击确定按钮，从下面文本框可以读取挠度方程和端截\
+面转角，从右侧可以看到受力示意图。\n\n注：\n1.此处仅可以计算悬臂梁和简支梁模型，外\
+伸梁可以基于这两种情况用叠加法计算；\n2.由于此处解算进行了对称弯曲假设和纯弯曲假设\
+，计算结果仅适用于横截面关于剪力方向对称的细长梁；\n3.此处仅计算受力点在自由端或全\
+梁受均布载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出。")
         self.help_label.pack()
 
     def about(self):
@@ -711,8 +1167,8 @@ class deflectionEquationCalculator:
         self.about_top.title("关于")
         self.about_label = tkinter.Label(self.about_top,
                                          justify="left",
-                                         text="弯矩方程计算器\n版本号：0.0.1\n\
-权利声明：xxxxxx\n网址：xxxxxx")
+                                         text="弯矩方程计算器\n\n版本号：0.0.1\
+\n权利声明：xxxxxx\n网址：xxxxxx")
         self.about_label.pack()
 
 
