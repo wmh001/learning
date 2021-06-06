@@ -116,8 +116,12 @@ class deflectionEquationCalculator:
         self.cantilever_beam_moment_list.append(
             self.cantilever_beam_moment_angle_entry)
 
-        self.cantilever_beam_moment_canvas = tkinter.Canvas(self.root, width=300, height=161, bg="white")
-        self.cantilever_beam_moment_list.append(self.cantilever_beam_moment_canvas)
+        self.cantilever_beam_moment_canvas = tkinter.Canvas(self.root,
+                                                            width=300,
+                                                            height=161,
+                                                            bg="white")
+        self.cantilever_beam_moment_list.append(
+            self.cantilever_beam_moment_canvas)
 
         self.cantilever_beam_power_list = []
 
@@ -200,6 +204,13 @@ class deflectionEquationCalculator:
         self.cantilever_beam_power_list.append(
             self.cantilever_beam_power_angle_entry)
 
+        self.cantilever_beam_power_canvas = tkinter.Canvas(self.root,
+                                                           width=300,
+                                                           height=161,
+                                                           bg="white")
+        self.cantilever_beam_power_list.append(
+            self.cantilever_beam_power_canvas)
+
         self.cantilever_beam_UL_list = []
 
         self.cantilever_beam_UL_q_label = tkinter.Label(
@@ -270,7 +281,38 @@ class deflectionEquationCalculator:
         self.cantilever_beam_UL_list.append(
             self.cantilever_beam_UL_angle_entry)
 
+        self.cantilever_beam_UL_canvas = tkinter.Canvas(self.root,
+                                                        width=300,
+                                                        height=161,
+                                                        bg="white")
+        self.cantilever_beam_UL_list.append(self.cantilever_beam_UL_canvas)
+
         self.root.mainloop()
+
+    def draw_cantilever_beam(self, self_canvas, x, y):
+        self_canvas.create_line(x, y - 20, x, y + 20)
+        self_canvas.create_line(x, y, x + 200, y)
+
+    def draw_moment(self, self_canvas, x, y):
+        self_canvas.create_line(x, y - 20, x, y + 20)
+        self_canvas.create_line(x, y - 20, x + 20, y - 20, arrow="last")
+        self_canvas.create_line(x, y + 20, x - 20, y + 20, arrow="last")
+        self_canvas.create_text(x + 10, y - 20, text='M', anchor='s')
+
+    def draw_power(self, self_canvas, x, y):
+        self_canvas.create_line(x, y - 40, x, y, arrow="last")
+        self_canvas.create_text(x + 2, y - 35, text='F', anchor='w')
+
+    def draw_UL(self, self_canvas, x, y):
+        self_canvas.create_line(x, y - 20, x + 200, y - 20)
+        self_canvas.create_line(x, y - 20, x, y, arrow="last")
+        for i in range(20):
+            self_canvas.create_line(x + 10 * (i + 1),
+                                    y - 20,
+                                    x + 10 * (i + 1),
+                                    y,
+                                    arrow="last")
+        self_canvas.create_text(x + 100, y - 20, text='q', anchor='s')
 
     def cantilever_beam_moment_interface(self):
         self.initial_text.pack_forget()
@@ -302,6 +344,7 @@ class deflectionEquationCalculator:
                                                      sticky='E')
         self.cantilever_beam_moment_angle_val.set("")
         self.cantilever_beam_moment_canvas.grid(row=0, column=2, rowspan=7)
+        self.cantilever_beam_moment_canvas.delete("all")
 
     def cantilever_beam_moment_determine(self):
         try:
@@ -313,6 +356,9 @@ class deflectionEquationCalculator:
             angle_B = 2 * coefficient_w * float(
                 self.cantilever_beam_moment_l_entry.get())
             self.cantilever_beam_moment_angle_val.set("%0.7f " % angle_B)
+            self.draw_cantilever_beam(self.cantilever_beam_moment_canvas, 50,
+                                      80)
+            self.draw_moment(self.cantilever_beam_moment_canvas, 250, 80)
         except ValueError:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
@@ -353,6 +399,8 @@ class deflectionEquationCalculator:
                                                     column=1,
                                                     sticky='E')
         self.cantilever_beam_power_angle_val.set("")
+        self.cantilever_beam_power_canvas.grid(row=0, column=2, rowspan=7)
+        self.cantilever_beam_power_canvas.delete("all")
 
     def cantilever_beam_power_determine(self):
         try:
@@ -365,6 +413,9 @@ class deflectionEquationCalculator:
             angle_B = 3 * coefficient_w * float(
                 self.cantilever_beam_power_l_entry.get())**2
             self.cantilever_beam_power_angle_val.set("%0.7f " % angle_B)
+            self.draw_cantilever_beam(self.cantilever_beam_power_canvas, 50,
+                                      80)
+            self.draw_power(self.cantilever_beam_power_canvas, 250, 80)
         except ValueError:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
@@ -401,6 +452,8 @@ class deflectionEquationCalculator:
         self.cantilever_beam_UL_angle_label.grid(row=6, column=0, sticky='E')
         self.cantilever_beam_UL_angle_entry.grid(row=6, column=1, sticky='E')
         self.cantilever_beam_UL_angle_val.set("")
+        self.cantilever_beam_UL_canvas.grid(row=0, column=2, rowspan=7)
+        self.cantilever_beam_UL_canvas.delete("all")
 
     def cantilever_beam_UL_determine(self):
         try:
@@ -415,6 +468,8 @@ class deflectionEquationCalculator:
             angle_B = 4 * coefficient_w * float(
                 self.cantilever_beam_UL_l_entry.get())**3
             self.cantilever_beam_UL_angle_val.set("%0.7f " % angle_B)
+            self.draw_cantilever_beam(self.cantilever_beam_UL_canvas, 50, 80)
+            self.draw_UL(self.cantilever_beam_UL_canvas, 50, 80)
         except ValueError:
             self.warning_top = tkinter.Toplevel()
             self.warning_top.geometry("200x80")
