@@ -53,8 +53,8 @@ class deflectionEquationSolution:
         self.initial_text.config(font=("宋体", 20))
         self.initial_text.pack()
 
-        # 创建受力矩悬臂梁的构件
-
+        # 创建梁的构件
+        # 创建广义力输入栏
         self.F_label = tkinter.Label(self.root,
                                      width=self.label_width,
                                      anchor='e')
@@ -63,28 +63,28 @@ class deflectionEquationSolution:
                                      textvariable=self.F_val,
                                      width=self.entry_width)
 
-        # 创建弹性模量输入口
+        # 创建弹性模量输入栏
         self.E_label = tkinter.Label(self.root, text="弹性模量(单位为GPa)=")
         self.E_val = tkinter.StringVar()
         self.E_entry = tkinter.Entry(self.root,
                                      textvariable=self.E_val,
                                      width=self.entry_width)
 
-        # 创建惯性矩输入口
+        # 创建惯性矩输入栏
         self.I_label = tkinter.Label(self.root, text="关于中性轴的惯性矩(单位为cm^4)=")
         self.I_val = tkinter.StringVar()
         self.I_entry = tkinter.Entry(self.root,
                                      textvariable=self.I_val,
                                      width=self.entry_width)
 
-        # 创建梁长输入口
+        # 创建梁长输入栏
         self.l_label = tkinter.Label(self.root, text="梁长(单位为m)=")
         self.l_val = tkinter.StringVar()
         self.l_entry = tkinter.Entry(self.root,
                                      textvariable=self.l_val,
                                      width=self.entry_width)
 
-        # 创建力端距输入口
+        # 创建力端距输入栏
         self.a_label = tkinter.Label(self.root, text="受力点到左端的距离(单位为m)=")
         self.a_val = tkinter.StringVar()
         self.a_entry = tkinter.Entry(self.root,
@@ -94,7 +94,7 @@ class deflectionEquationSolution:
         # 创建确定按钮
         self.beam_button = tkinter.Button(self.root, text="确定")
 
-        # 创建挠度方程输出口
+        # 创建挠度方程输出栏
         self.w_label = tkinter.Label(self.root, text="挠度方程(单位为m)：")
         self.w_val = tkinter.StringVar()
         self.w_entry = tkinter.Entry(self.root,
@@ -108,7 +108,7 @@ class deflectionEquationSolution:
                                       width=self.entry_width)
         self.w_entry2.config(state='readonly')
 
-        # 创建端截面转角输出口
+        # 创建端截面转角输出栏
         self.angle_label = tkinter.Label(self.root, text="端截面转角(单位为弧度)：")
         self.angle_val = tkinter.StringVar()
         self.angle_entry = tkinter.Entry(self.root,
@@ -116,7 +116,7 @@ class deflectionEquationSolution:
                                          width=self.entry_width)
         self.angle_entry.config(state='readonly')
 
-        # 创建右端截面转角
+        # 创建右端截面转角输出栏
         self.angleB_label = tkinter.Label(self.root, text="右端截面转角(单位为弧度)：")
         self.angleB_val = tkinter.StringVar()
         self.angleB_entry = tkinter.Entry(self.root,
@@ -132,6 +132,7 @@ class deflectionEquationSolution:
 
         self.root.mainloop()
 
+    # 布局方式1，适用于悬臂梁受力矩、悬臂梁受力、悬臂梁受均布载荷
     def arrange_Interface1(self):
         self.F_label.grid(row=0, column=0, sticky='E')
         self.F_entry.grid(row=0, column=1, sticky='E')
@@ -156,6 +157,7 @@ class deflectionEquationSolution:
         self.beam_canvas.delete("all")
         self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
 
+    # 布局方式2，适用于简支梁受力矩、简支梁受力
     def arrange_Interface2(self):
         self.F_label.grid(row=0, column=0, sticky='E')
         self.F_entry.grid(row=0, column=1, sticky='E')
@@ -188,6 +190,7 @@ class deflectionEquationSolution:
         self.beam_canvas.delete("all")
         self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
 
+    # 布局方式3，适用于简支梁受均布载荷
     def arrange_Interface3(self):
         self.F_label.grid(row=0, column=0, sticky='E')
         self.F_entry.grid(row=0, column=1, sticky='E')
@@ -267,8 +270,8 @@ class deflectionEquationSolution:
                                 text="q=" + value + "N*m^(-1)",
                                 anchor='s')
 
+    # 错误警告
     def warning(self):
-        # 创建错误警告窗口
         self.warning_top = tkinter.Toplevel()
         self.warning_top.geometry("200x80")
         self.warning_top.title("警告")
@@ -281,13 +284,14 @@ class deflectionEquationSolution:
 
     # 布局力矩悬臂梁界面
     def cantilever_beam_moment_interface(self):
-        # 清空界面
+        # 删除多余构件
         self.initial_text.pack_forget()
         self.a_label.grid_forget()
         self.a_entry.grid_forget()
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        # 更改构件
         self.F_label["text"] = "力矩(单位为N*m，顺时针为正方向)="
         self.beam_button["command"] = self.cantilever_beam_moment_determine
         self.arrange_Interface1()
@@ -295,7 +299,7 @@ class deflectionEquationSolution:
     # 显示力矩悬臂梁计算结果
     def cantilever_beam_moment_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
@@ -314,13 +318,14 @@ class deflectionEquationSolution:
 
     # 布局力悬臂梁界面
     def cantilever_beam_power_interface(self):
-        # 清空界面
+        # 删除多余构件
         self.initial_text.pack_forget()
         self.a_label.grid_forget()
         self.a_entry.grid_forget()
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        # 更改构件
         self.F_label["text"] = "力(单位为N，向下为正方向)="
         self.beam_button["command"] = self.cantilever_beam_power_determine
         self.arrange_Interface1()
@@ -328,7 +333,7 @@ class deflectionEquationSolution:
     # 显示力悬臂梁计算结果
     def cantilever_beam_power_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
@@ -349,13 +354,14 @@ class deflectionEquationSolution:
 
     # 布局均布载荷悬臂梁界面
     def cantilever_beam_UL_interface(self):
-        # 清空界面
+        # 删除多余构件
         self.initial_text.pack_forget()
         self.a_label.grid_forget()
         self.a_entry.grid_forget()
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        # 更改构件
         self.F_label["text"] = "均布载荷集度(单位为N*m^(-1))，向下为正方向)="
         self.beam_button["command"] = self.cantilever_beam_UL_determine
         self.arrange_Interface1()
@@ -363,7 +369,7 @@ class deflectionEquationSolution:
     # 显示均布载荷悬臂梁计算结果
     def cantilever_beam_UL_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
@@ -385,8 +391,9 @@ class deflectionEquationSolution:
 
     # 布局力矩简支梁界面
     def simple_beam_moment_interface(self):
-        # 清空界面
+        # 删除多余构件
         self.initial_text.pack_forget()
+        # 更改构件
         self.F_label["text"] = "力矩(单位为N*m，顺时针为正方向)="
         self.beam_button["command"] = self.simple_beam_moment_determine
         self.arrange_Interface2()
@@ -394,7 +401,7 @@ class deflectionEquationSolution:
     # 显示力矩简支梁计算结果
     def simple_beam_moment_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
@@ -435,8 +442,9 @@ class deflectionEquationSolution:
 
     # 布局力简支梁界面
     def simple_beam_power_interface(self):
-        # 清空界面
+        # 删除多余构件
         self.initial_text.pack_forget()
+        # 更改构件
         self.F_label["text"] = "力(单位为N，向下为正方向)="
         self.beam_button["command"] = self.simple_beam_power_determine
         self.arrange_Interface2()
@@ -444,7 +452,7 @@ class deflectionEquationSolution:
     # 显示力简支梁计算结果
     def simple_beam_power_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
@@ -481,11 +489,12 @@ class deflectionEquationSolution:
 
     # 布局均布载荷简支梁界面
     def simple_beam_UL_interface(self):
-        # 清空界面
+        # 删除多余组件
         self.initial_text.pack_forget()
         self.a_label.grid_forget()
         self.a_entry.grid_forget()
         self.w_entry2.grid_forget()
+        # 更改构件
         self.F_label["text"] = "均布载荷集度(单位为N*m^(-1))，向下为正方向)="
         self.beam_button["command"] = self.simple_beam_UL_determine
         self.arrange_Interface3()
@@ -493,7 +502,7 @@ class deflectionEquationSolution:
     # 显示均布载荷计算结果
     def simple_beam_UL_determine(self):
         try:
-            # 清除输出口
+            # 更新示意图
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
