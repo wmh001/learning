@@ -8,7 +8,7 @@ import tkinter
 
 
 # 挠度方程求解
-class deflectionEquationSolution:
+class DeflectionEquationSolution:
     def __init__(self):
         # 创建根窗口
         self.root = tkinter.Tk()
@@ -327,7 +327,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -375,7 +375,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2 * (3 * L - x)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -424,7 +424,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2 * (x**2 - 4 * L * x + 6 * L**2)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -484,7 +484,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (L**2 - 3 * b**2 - x**2)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
             for i in range(last, 20):
                 point = ()
                 for j in range(0, 6):
@@ -492,7 +492,7 @@ class deflectionEquationSolution:
                     w = coefficient_w * (-x**3 + 3 * L * (x - a)**2 +
                                          (L**2 - 3 * b**2) * x)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -548,7 +548,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (L**2 - b**2 - x**2)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
             for i in range(last, 20):
                 point = ()
                 for j in range(0, 6):
@@ -556,7 +556,7 @@ class deflectionEquationSolution:
                     w = coefficient_w * (L / b * (x - a)**3 +
                                          (L**2 - b**2) * x - x**3)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -603,7 +603,7 @@ class deflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (x**3 - 2 * L * x**2 + L**3)
                     point = point + (50 + 10 * i + j, 80 - 5000 * w)
-                self.beam_canvas.create_line(point, smooth=1)
+                self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
 
@@ -635,4 +635,4 @@ class deflectionEquationSolution:
 
 
 if __name__ == '__main__':
-    d = deflectionEquationSolution()
+    d = DeflectionEquationSolution()
