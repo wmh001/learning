@@ -306,10 +306,15 @@ class deflectionEquationSolution:
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
-            coefficient_w = -float(self.F_entry.get()) / (
-                2 * float(self.E_entry.get()) * 10**9 *
-                float(self.I_entry.get()) / 10**8)
-            angle_B = 2 * coefficient_w * float(self.l_entry.get())
+            L = float(self.l_entry.get())
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
+            if (L <= 0) or (E < 0) or (I_ < 0):
+                self.warning()
+                return
+            coefficient_w = -float(self.F_entry.get()) / (2 * E * 10**9 * I_ /
+                                                          10**8)
+            angle_B = 2 * coefficient_w * L
             # 显示结果
             self.w_val.set("w=%0.7f*x^2" % coefficient_w)
             self.angle_val.set("%0.7f " % angle_B)
@@ -340,11 +345,16 @@ class deflectionEquationSolution:
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
-            coefficient_w = -float(self.F_entry.get()) / (
-                6 * float(self.E_entry.get()) * 10**9 *
-                float(self.I_entry.get()) / 10**8)
-            intercept = 3 * float(self.l_entry.get())
-            angle_B = 3 * coefficient_w * float(self.l_entry.get())**2
+            L = float(self.l_entry.get())
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
+            if (L <= 0) or (E < 0) or (I_ < 0):
+                self.warning()
+                return
+            coefficient_w = -float(self.F_entry.get()) / (6 * E * 10**9 * I_ /
+                                                          10**8)
+            intercept = 3 * L
+            angle_B = 3 * coefficient_w * L**2
             # 显示结果
             self.w_val.set("w=%0.7f*x^2*(%0.2f-x)" %
                            (coefficient_w, intercept))
@@ -376,12 +386,17 @@ class deflectionEquationSolution:
             self.beam_canvas.delete("all")
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
-            coefficient_w = -float(self.F_entry.get()) / (
-                24 * float(self.E_entry.get()) * 10**9 *
-                float(self.I_entry.get()) / 10**8)
-            coefficient_x = -4 * float(self.l_entry.get())
-            intercept = 6 * float(self.l_entry.get())**2
-            angle_B = 4 * coefficient_w * float(self.l_entry.get())**3
+            L = float(self.l_entry.get())
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
+            if (L <= 0) or (E < 0) or (I_ < 0):
+                self.warning()
+                return
+            coefficient_w = -float(self.F_entry.get()) / (24 * E * 10**9 * I_ /
+                                                          10**8)
+            coefficient_x = -4 * L
+            intercept = 6 * L**2
+            angle_B = 4 * coefficient_w * L**3
             # 显示结果
             self.w_val.set("w=%0.7f*x^2*(x^2%0.2f*x+%0.2f)" %
                            (coefficient_w, coefficient_x, intercept))
@@ -411,13 +426,14 @@ class deflectionEquationSolution:
             L = float(self.l_entry.get())
             a = float(self.a_entry.get())
             b = L - a
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
             # 力端距大于梁长报错
-            if a > L:
+            if (b < 0) or (a < 0) or (L <= 0) or (E < 0) or (I_ < 0):
                 self.warning()
                 return
             coefficient_w = float(
-                self.F_entry.get()) / (6 * float(self.E_entry.get()) * 10**9 *
-                                       float(self.I_entry.get()) / 10**8 * L)
+                self.F_entry.get()) / (6 * E * 10**9 * I_ / 10**8 * L)
             angle_A = coefficient_w * (L**2 - 3 * b**2)
             angle_B = coefficient_w * (L**2 - 3 * a**2)
             # 显示结果
@@ -461,14 +477,15 @@ class deflectionEquationSolution:
             # 计算参数
             L = float(self.l_entry.get())
             a = float(self.a_entry.get())
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
             b = L - a
             # 力端距大于梁长报错
-            if a > L:
+            if (b < 0) or (a < 0) or (L <= 0) or (E < 0) or (I_ < 0):
                 self.warning()
                 return
-            coefficient_w = -float(self.F_entry.get()) * b / (
-                6 * float(self.E_entry.get()) * 10**9 *
-                float(self.I_entry.get()) / 10**8 * L)
+            coefficient_w = -float(self.F_entry.get()) * b / (6 * E * 10**9 *
+                                                              I_ / 10**8 * L)
             angle_A = coefficient_w * a * (L + b)
             angle_B = -coefficient_w * a * (L + a)
             # 显示结果
@@ -510,9 +527,13 @@ class deflectionEquationSolution:
             self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
-            coefficient_w = -float(self.F_entry.get()) / (
-                24 * float(self.E_entry.get()) * 10**9 *
-                float(self.I_entry.get()) / 10**8)
+            E = float(self.E_entry.get())
+            I_ = float(self.I_entry.get())
+            if (L <= 0) or (E < 0) or (I_ < 0):
+                self.warning()
+                return
+            coefficient_w = -float(self.F_entry.get()) / (24 * E * 10**9 * I_ /
+                                                          10**8)
             angle_A = coefficient_w * L**3
             angle_B = -angle_A
             # 显示结果
