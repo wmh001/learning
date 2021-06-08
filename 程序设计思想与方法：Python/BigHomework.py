@@ -1,5 +1,8 @@
 # -*-coding:utf-8-*-
 
+# Author: Wang Maohua
+# Version: 0.0.1
+
 # 导入模块
 import tkinter
 
