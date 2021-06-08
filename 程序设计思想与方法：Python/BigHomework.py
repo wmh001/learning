@@ -321,6 +321,13 @@ class deflectionEquationSolution:
             # 绘制示意图
             self.draw_cantilever_beam(self.beam_canvas, 50, 80)
             self.draw_moment(self.beam_canvas, 250, 80, self.F_entry.get())
+            for i in range(0, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x**2
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
@@ -362,6 +369,13 @@ class deflectionEquationSolution:
             # 绘制示意图
             self.draw_cantilever_beam(self.beam_canvas, 50, 80)
             self.draw_power(self.beam_canvas, 250, 80, self.F_entry.get())
+            for i in range(0, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x**2 * (3 * L - x)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
@@ -404,6 +418,13 @@ class deflectionEquationSolution:
             # 绘制示意图
             self.draw_cantilever_beam(self.beam_canvas, 50, 80)
             self.draw_UL(self.beam_canvas, 50, 80, self.F_entry.get())
+            for i in range(0, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x**2 * (x**2 - 4 * L * x + 6 * L**2)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
@@ -456,6 +477,22 @@ class deflectionEquationSolution:
             self.draw_simple_beam(self.beam_canvas, 50, 80)
             self.draw_moment(self.beam_canvas, 50 + 200 * a / L, 80,
                              self.F_entry.get())
+            last = int(20 * a / L)
+            for i in range(0, last):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x * (L**2 - 3 * b**2 - x**2)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
+            for i in range(last, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * (-x**3 + 3 * L * (x - a)**2 +
+                                         (L**2 - 3 * b**2) * x)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
@@ -504,6 +541,22 @@ class deflectionEquationSolution:
             self.draw_simple_beam(self.beam_canvas, 50, 80)
             self.draw_power(self.beam_canvas, 50 + 200 * a / L, 80,
                             self.F_entry.get())
+            last = int(20 * a / L)
+            for i in range(0, last):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x * (L**2 - b**2 - x**2)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
+            for i in range(last, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * (L / b * (x - a)**3 +
+                                         (L**2 - b**2) * x - x**3)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
@@ -544,6 +597,13 @@ class deflectionEquationSolution:
             # 绘制示意图
             self.draw_simple_beam(self.beam_canvas, 50, 80)
             self.draw_UL(self.beam_canvas, 50, 80, self.F_entry.get())
+            for i in range(0, 20):
+                point = ()
+                for j in range(0, 6):
+                    x = (10 * i + j) / 200 * L
+                    w = coefficient_w * x * (x**3 - 2 * L * x**2 + L**3)
+                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                self.beam_canvas.create_line(point, smooth=1)
         except:
             self.warning()
 
