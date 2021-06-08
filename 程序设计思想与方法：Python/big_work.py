@@ -26,13 +26,13 @@ class DeflectionEquationSolution:
         self.cantilever_beam_type_meun = tkinter.Menu(self.beam_type_meun)
         self.simple_beam_type_meun = tkinter.Menu(self.beam_type_meun)
         self.help_meun = tkinter.Menu(self.root)
-        self.meun.add_cascade(label="梁的种类", menu=self.beam_type_meun)
+        self.meun.add_cascade(label="梁种类", menu=self.beam_type_meun)
         self.beam_type_meun.add_cascade(label="悬臂梁",
                                         menu=self.cantilever_beam_type_meun)
         self.cantilever_beam_type_meun.add_command(
-            label="受端力矩", command=self.cantilever_beam_moment_interface)
+            label="受力矩", command=self.cantilever_beam_moment_interface)
         self.cantilever_beam_type_meun.add_command(
-            label="受端力", command=self.cantilever_beam_power_interface)
+            label="受力", command=self.cantilever_beam_power_interface)
         self.cantilever_beam_type_meun.add_command(
             label="受均布载荷", command=self.cantilever_beam_UL_interface)
         self.beam_type_meun.add_cascade(label="简支梁",
@@ -607,7 +607,7 @@ class DeflectionEquationSolution:
         except:
             self.warning()
 
-    # 创建教程窗口
+    # 显示教程窗口
     def course(self):
         self.help_top = tkinter.Toplevel()
         self.help_top.title("教程")
@@ -616,13 +616,15 @@ class DeflectionEquationSolution:
             justify="left",
             text="使用步骤如下：\n1.从菜单栏中选择梁的种类和受力类型；\n2.输入受\
 力值、弹性模量、惯性矩等参数；\n3.点击确定按钮，从下面文本框可以读取挠度方程和端截\
-面转角，从右侧可以看到受力示意图。\n\n注：\n1.此处仅可以计算悬臂梁和简支梁模型，外\
-伸梁可以基于这两种情况用叠加法计算；\n2.由于此处解算进行了对称弯曲假设和纯弯曲假设\
-，计算结果仅适用于横截面关于剪力方向对称的细长梁；\n3.此处仅计算受力点在自由端或全\
-梁受均布载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出。")
+面转角，从右侧可以看到受力示意图和弯曲后的轴线（红色虚线）。\n\n注：\n1.此处计算结\
+果仅适用于弹性范围内；\n2.此处仅可以计算悬臂梁和简支梁模型，外伸梁可以基于这两种情\
+况用叠加法计算；\n3.由于此处解算进行了平截面假设、对称弯曲假设和纯弯曲假设，计算结\
+果仅适用于横截面关于剪力方向对称的细长梁；\n4.此处仅计算受力点在自由端或全梁受均布\
+载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出；\n5.在工程中，挠度\
+相对跨度极小，因此图中弯曲后的直线是挠度增大到原来的5000倍的结果。")
         self.help_label.pack()
 
-    # 创建关于窗口
+    # 显示关于窗口
     def about(self):
         self.about_top = tkinter.Toplevel()
         self.about_top.geometry("200x100")
