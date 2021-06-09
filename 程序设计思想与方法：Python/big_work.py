@@ -150,7 +150,7 @@ class DeflectionEquationSolution:
         # 创建示意图
         self.beam_canvas = tkinter.Canvas(self.root,
                                           width=self.canvas_width,
-                                          height=161,
+                                          height=180,
                                           bg="white")
 
         self.root.mainloop()
@@ -211,7 +211,7 @@ class DeflectionEquationSolution:
         self.angle_val.set("")
         self.beam_canvas.grid(row=0, column=2, rowspan=7)
         self.beam_canvas.delete("all")
-        self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+        self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
 
     # 布局方式2，适用于简支梁受力矩、简支梁受力
     def arrange_Interface2(self):
@@ -300,6 +300,7 @@ class DeflectionEquationSolution:
         self.angleB_label.grid(row=7, column=0, sticky='E')
         self.label_list.append(self.angleB_label)
         self.angleB_entry.grid(row=7, column=1, sticky='E')
+        self.entry_list.append(self.angleB_entry)
         self.angleB_val.set("")
         self.beam_canvas.grid(row=0, column=2, rowspan=7)
         self.beam_canvas.delete("all")
@@ -360,7 +361,7 @@ class DeflectionEquationSolution:
     # 错误警告
     def warning(self):
         self.warning_top = tkinter.Toplevel()
-        self.warning_top.geometry("200x80")
+        self.warning_top.geometry("250x100")
         self.warning_top.title("警告")
         self.warning_label_1 = tkinter.Label(self.warning_top, text="!")
         self.warning_label_1.config(font=("宋体", 40), fg="red")
@@ -391,7 +392,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             E = float(self.E_entry.get())
@@ -406,14 +407,14 @@ class DeflectionEquationSolution:
             self.w_val.set("w=%0.7f*x^2" % coefficient_w)
             self.angle_val.set("%0.7f " % angle_B)
             # 绘制示意图
-            self.draw_cantilever_beam(self.beam_canvas, 50, 80)
-            self.draw_moment(self.beam_canvas, 250, 80, self.F_entry.get())
+            self.draw_cantilever_beam(self.beam_canvas, 50, 90)
+            self.draw_moment(self.beam_canvas, 250, 90, self.F_entry.get())
             for i in range(0, 20):
                 point = ()
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -440,7 +441,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             E = float(self.E_entry.get())
@@ -457,14 +458,14 @@ class DeflectionEquationSolution:
                            (coefficient_w, intercept))
             self.angle_val.set("%0.7f " % angle_B)
             # 绘制示意图
-            self.draw_cantilever_beam(self.beam_canvas, 50, 80)
-            self.draw_power(self.beam_canvas, 250, 80, self.F_entry.get())
+            self.draw_cantilever_beam(self.beam_canvas, 50, 90)
+            self.draw_power(self.beam_canvas, 250, 90, self.F_entry.get())
             for i in range(0, 20):
                 point = ()
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2 * (3 * L - x)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -491,7 +492,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             E = float(self.E_entry.get())
@@ -509,14 +510,14 @@ class DeflectionEquationSolution:
                            (coefficient_w, coefficient_x, intercept))
             self.angle_val.set("%0.7f " % angle_B)
             # 绘制示意图
-            self.draw_cantilever_beam(self.beam_canvas, 50, 80)
-            self.draw_UL(self.beam_canvas, 50, 80, self.F_entry.get())
+            self.draw_cantilever_beam(self.beam_canvas, 50, 90)
+            self.draw_UL(self.beam_canvas, 50, 90, self.F_entry.get())
             for i in range(0, 20):
                 point = ()
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x**2 * (x**2 - 4 * L * x + 6 * L**2)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -538,7 +539,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             a = float(self.a_entry.get())
@@ -570,8 +571,8 @@ class DeflectionEquationSolution:
                     "w=%0.7f*(-x^3+%0.2f*(x-%0.2f)^2+%0.2f*x)(%0.2f≤x≤%0.2f)" %
                     (coefficient_w, 3 * L, a, L**2 - 3 * b**2, a, L))
             # 绘制示意图
-            self.draw_simple_beam(self.beam_canvas, 50, 80)
-            self.draw_moment(self.beam_canvas, 50 + 200 * a / L, 80,
+            self.draw_simple_beam(self.beam_canvas, 50, 90)
+            self.draw_moment(self.beam_canvas, 50 + 200 * a / L, 90,
                              self.F_entry.get())
             last = int(20 * a / L)
             for i in range(0, last):
@@ -579,7 +580,7 @@ class DeflectionEquationSolution:
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (L**2 - 3 * b**2 - x**2)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
             for i in range(last, 20):
                 point = ()
@@ -587,7 +588,7 @@ class DeflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * (-x**3 + 3 * L * (x - a)**2 +
                                          (L**2 - 3 * b**2) * x)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -609,7 +610,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             a = float(self.a_entry.get())
@@ -637,8 +638,8 @@ class DeflectionEquationSolution:
                     "w=%0.7f*(%0.2f*(x-%0.2f)^3+%0.2f*x-x^3)(%0.2f≤x≤%0.2f)" %
                     (coefficient_w, L / b, a, L**2 - b**2, a, L))
             # 绘制示意图
-            self.draw_simple_beam(self.beam_canvas, 50, 80)
-            self.draw_power(self.beam_canvas, 50 + 200 * a / L, 80,
+            self.draw_simple_beam(self.beam_canvas, 50, 90)
+            self.draw_power(self.beam_canvas, 50 + 200 * a / L, 90,
                             self.F_entry.get())
             last = int(20 * a / L)
             for i in range(0, last):
@@ -646,7 +647,7 @@ class DeflectionEquationSolution:
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (L**2 - b**2 - x**2)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
             for i in range(last, 20):
                 point = ()
@@ -654,7 +655,7 @@ class DeflectionEquationSolution:
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * (L / b * (x - a)**3 +
                                          (L**2 - b**2) * x - x**3)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -679,7 +680,7 @@ class DeflectionEquationSolution:
         try:
             # 更新示意图
             self.beam_canvas.delete("all")
-            self.beam_canvas.create_text(150, 160, text="示意图", anchor='s')
+            self.beam_canvas.create_text(150, 180, text="示意图", anchor='s')
             # 计算参数
             L = float(self.l_entry.get())
             E = float(self.E_entry.get())
@@ -697,14 +698,14 @@ class DeflectionEquationSolution:
             self.w_val.set("w=%0.7f*x*(%0.2f-%0.2f*x^2+x^3)" %
                            (coefficient_w, L**3, 2 * L))
             # 绘制示意图
-            self.draw_simple_beam(self.beam_canvas, 50, 80)
-            self.draw_UL(self.beam_canvas, 50, 80, self.F_entry.get())
+            self.draw_simple_beam(self.beam_canvas, 50, 90)
+            self.draw_UL(self.beam_canvas, 50, 90, self.F_entry.get())
             for i in range(0, 20):
                 point = ()
                 for j in range(0, 6):
                     x = (10 * i + j) / 200 * L
                     w = coefficient_w * x * (x**3 - 2 * L * x**2 + L**3)
-                    point = point + (50 + 10 * i + j, 80 - 5000 * w)
+                    point = point + (50 + 10 * i + j, 90 - 5000 * w)
                 self.beam_canvas.create_line(point, smooth=1, fill="red")
         except:
             self.warning()
@@ -733,7 +734,7 @@ class DeflectionEquationSolution:
     # 显示关于窗口
     def about(self):
         self.about_top = tkinter.Toplevel()
-        self.about_top.geometry("200x100")
+        self.about_top.geometry("250x125")
         self.about_top.title("关于")
         self.about_label = tkinter.Label(self.about_top,
                                          justify="left",
