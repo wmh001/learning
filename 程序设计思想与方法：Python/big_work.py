@@ -8,6 +8,15 @@
 # 导入模块
 import tkinter
 from PIL import ImageGrab
+import ctypes
+
+# 设置正确的DPI感知
+# >= win 8.1
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)
+# win 8.0 or less
+except:
+    ctypes.windll.user32.SetProcessDPIAware()
 
 
 # 挠度方程求解
@@ -149,10 +158,10 @@ class DeflectionEquationSolution:
     # 保存当前窗口
     def saveasjpg(self):
         self.root.update()
-        x = 1.25 * self.root.winfo_rootx()
-        y = 1.25 * self.root.winfo_rooty()
-        x1 = x + 1.25 * self.root.winfo_width()
-        y1 = y + 1.25 * self.root.winfo_height()
+        x = self.root.winfo_rootx()
+        y = self.root.winfo_rooty()
+        x1 = x + self.root.winfo_width()
+        y1 = y + self.root.winfo_height()
         ImageGrab.grab().crop((x, y, x1, y1)).save("result.jpg")
 
     # 保存为文本
@@ -716,9 +725,9 @@ class DeflectionEquationSolution:
 种情况用叠加法计算；\n3.由于此处解算进行了平截面假设、对称弯曲假设和纯弯曲假设，计\
 算结果仅适用于横截面关于剪力方向对称的细长梁；\n4.此处仅计算受力点在自由端或全梁受\
 均布载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出；\n5.在工程中，\
-挠度相对跨度极小，因此图中弯曲后的直线是挠度增大到原来的5000倍的结果。\n6.“保存当\
-前窗口”功能仅适用于显示缩放大小为125%的电脑；\n7.“保存为文本”功能仅保存当前界面参\
-数和计算结果，不能检测当前参数是否可以计算和当前结果是否为当前参数计算出。")
+挠度相对跨度极小，因此图中弯曲后的直线是挠度增大到原来的5000倍的结果。\n6.“保存为\
+文本”功能仅保存当前界面参数和计算结果，不能检测当前参数是否可以计算和当前结果是否为\
+当前参数计算出。")
         self.help_label.pack()
 
     # 显示关于窗口
