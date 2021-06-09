@@ -1,10 +1,13 @@
 # -*-coding:utf-8-*-
 
-# Author: Wang Maohua
+# Author: 王茂华
+# id:519021911083
+# name:程序设计思想与方法（Python）大作业————挠度方程求解程序
 # Version: 0.0.1
 
 # 导入模块
 import tkinter
+from PIL import ImageGrab
 
 
 # 挠度方程求解
@@ -22,10 +25,15 @@ class DeflectionEquationSolution:
         # 创建菜单系统
         self.meun = tkinter.Menu(self.root)
         self.root.config(menu=self.meun)
+        self.file_meun = tkinter.Menu(self.meun)
         self.beam_type_meun = tkinter.Menu(self.meun)
         self.cantilever_beam_type_meun = tkinter.Menu(self.beam_type_meun)
         self.simple_beam_type_meun = tkinter.Menu(self.beam_type_meun)
         self.help_meun = tkinter.Menu(self.root)
+        self.meun.add_cascade(label="文件", menu=self.file_meun)
+        self.file_meun.add_command(label="保存当前窗口", command=self.saveasjpg)
+        self.file_meun.add_command(label="保存为文本", command=self.saveastxt)
+        self.file_meun.add_command(label="退出", command=self.root.quit)
         self.meun.add_cascade(label="梁种类", menu=self.beam_type_meun)
         self.beam_type_meun.add_cascade(label="悬臂梁",
                                         menu=self.cantilever_beam_type_meun)
@@ -55,6 +63,9 @@ class DeflectionEquationSolution:
                                           text="欢迎使用！\n请在上面菜单栏中选择梁的种类或获取帮助。")
         self.initial_text.config(font=("宋体", 20))
         self.initial_text.pack()
+
+        self.label_list = []
+        self.entry_list = []
 
         # 创建梁的构件
         # 创建广义力输入栏
@@ -112,7 +123,7 @@ class DeflectionEquationSolution:
         self.w_entry2.config(state='readonly')
 
         # 创建端截面转角输出栏
-        self.angle_label = tkinter.Label(self.root, text="端截面转角(单位为弧度)：")
+        self.angle_label = tkinter.Label(self.root)
         self.angle_val = tkinter.StringVar()
         self.angle_entry = tkinter.Entry(self.root,
                                          textvariable=self.angle_val,
@@ -135,26 +146,59 @@ class DeflectionEquationSolution:
 
         self.root.mainloop()
 
+    # 保存当前窗口
+    def saveasjpg(self):
+        self.root.update()
+        x = 1.25 * self.root.winfo_rootx()
+        y = 1.25 * self.root.winfo_rooty()
+        x1 = x + 1.25 * self.root.winfo_width()
+        y1 = y + 1.25 * self.root.winfo_height()
+        ImageGrab.grab().crop((x, y, x1, y1)).save("result.jpg")
+
+    # 保存为文本
+    def saveastxt(self):
+        f = open("result.txt", 'w')
+        for i in range(len(self.label_list)):
+            if self.label_list[i] != -1:
+                f.write(self.label_list[i]["text"] + self.entry_list[i].get() +
+                        "\n")
+            else:
+                f.write("                                " +
+                        self.entry_list[i].get() + "\n")
+        f.close()
+
     # 布局方式1，适用于悬臂梁受力矩、悬臂梁受力、悬臂梁受均布载荷
     def arrange_Interface1(self):
         self.F_label.grid(row=0, column=0, sticky='E')
+        self.label_list.append(self.F_label)
         self.F_entry.grid(row=0, column=1, sticky='E')
-        self.F_val.set("1")
+        self.entry_list.append(self.F_entry)
+        self.F_val.set("2000")
         self.E_label.grid(row=1, column=0, sticky='E')
+        self.label_list.append(self.E_label)
         self.E_entry.grid(row=1, column=1, sticky='E')
-        self.E_val.set("1")
+        self.entry_list.append(self.E_entry)
+        self.E_val.set("200")
         self.I_label.grid(row=2, column=0, sticky='E')
+        self.label_list.append(self.I_label)
         self.I_entry.grid(row=2, column=1, sticky='E')
-        self.I_val.set("1")
+        self.entry_list.append(self.I_entry)
+        self.I_val.set("100")
         self.l_label.grid(row=3, column=0, sticky='E')
+        self.label_list.append(self.l_label)
         self.l_entry.grid(row=3, column=1, sticky='E')
-        self.l_val.set("1")
+        self.entry_list.append(self.l_entry)
+        self.l_val.set("1.5")
         self.beam_button.grid(row=4, column=0, columnspan=2)
         self.w_label.grid(row=5, column=0, sticky='E')
+        self.label_list.append(self.w_label)
         self.w_entry.grid(row=5, column=1, sticky='E')
+        self.entry_list.append(self.w_entry)
         self.w_val.set("")
         self.angle_label.grid(row=6, column=0, sticky='E')
+        self.label_list.append(self.angle_label)
         self.angle_entry.grid(row=6, column=1, sticky='E')
+        self.entry_list.append(self.angle_entry)
         self.angle_val.set("")
         self.beam_canvas.grid(row=0, column=2, rowspan=7)
         self.beam_canvas.delete("all")
@@ -163,31 +207,49 @@ class DeflectionEquationSolution:
     # 布局方式2，适用于简支梁受力矩、简支梁受力
     def arrange_Interface2(self):
         self.F_label.grid(row=0, column=0, sticky='E')
+        self.label_list.append(self.F_label)
         self.F_entry.grid(row=0, column=1, sticky='E')
-        self.F_val.set("1")
+        self.entry_list.append(self.F_entry)
+        self.F_val.set("2000")
         self.E_label.grid(row=1, column=0, sticky='E')
+        self.label_list.append(self.E_label)
         self.E_entry.grid(row=1, column=1, sticky='E')
-        self.E_val.set("1")
+        self.entry_list.append(self.E_entry)
+        self.E_val.set("200")
         self.I_label.grid(row=2, column=0, sticky='E')
+        self.label_list.append(self.I_label)
         self.I_entry.grid(row=2, column=1, sticky='E')
-        self.I_val.set("1")
+        self.entry_list.append(self.I_entry)
+        self.I_val.set("100")
         self.l_label.grid(row=3, column=0, sticky='E')
+        self.label_list.append(self.l_label)
         self.l_entry.grid(row=3, column=1, sticky='E')
-        self.l_val.set("1")
+        self.entry_list.append(self.l_entry)
+        self.l_val.set("1.5")
         self.a_label.grid(row=4, column=0, sticky='E')
+        self.label_list.append(self.a_label)
         self.a_entry.grid(row=4, column=1, sticky='E')
+        self.entry_list.append(self.a_entry)
         self.a_val.set("1")
         self.beam_button.grid(row=5, column=0, columnspan=2)
         self.w_label.grid(row=6, column=0, sticky='E')
+        self.label_list.append(self.w_label)
         self.w_entry.grid(row=6, column=1, sticky='E')
+        self.entry_list.append(self.w_entry)
         self.w_val.set("")
+        self.label_list.append(-1)
         self.w_entry2.grid(row=7, column=1, sticky='E')
+        self.entry_list.append(self.w_entry2)
         self.w_val2.set("")
         self.angle_label.grid(row=8, column=0, sticky='E')
+        self.label_list.append(self.angle_label)
         self.angle_entry.grid(row=8, column=1, sticky='E')
+        self.entry_list.append(self.angle_entry)
         self.angle_val.set("")
         self.angleB_label.grid(row=9, column=0, sticky='E')
+        self.label_list.append(self.angleB_label)
         self.angleB_entry.grid(row=9, column=1, sticky='E')
+        self.entry_list.append(self.angleB_entry)
         self.angleB_val.set("")
         self.beam_canvas.grid(row=0, column=2, rowspan=7)
         self.beam_canvas.delete("all")
@@ -196,25 +258,38 @@ class DeflectionEquationSolution:
     # 布局方式3，适用于简支梁受均布载荷
     def arrange_Interface3(self):
         self.F_label.grid(row=0, column=0, sticky='E')
+        self.label_list.append(self.F_label)
         self.F_entry.grid(row=0, column=1, sticky='E')
-        self.F_val.set("1")
+        self.entry_list.append(self.F_entry)
+        self.F_val.set("2000")
         self.E_label.grid(row=1, column=0, sticky='E')
+        self.label_list.append(self.E_label)
         self.E_entry.grid(row=1, column=1, sticky='E')
-        self.E_val.set("1")
+        self.entry_list.append(self.E_entry)
+        self.E_val.set("200")
         self.I_label.grid(row=2, column=0, sticky='E')
+        self.label_list.append(self.I_label)
         self.I_entry.grid(row=2, column=1, sticky='E')
-        self.I_val.set("1")
+        self.entry_list.append(self.I_entry)
+        self.I_val.set("100")
         self.l_label.grid(row=3, column=0, sticky='E')
+        self.label_list.append(self.l_label)
         self.l_entry.grid(row=3, column=1, sticky='E')
-        self.l_val.set("1")
+        self.entry_list.append(self.l_entry)
+        self.l_val.set("1.5")
         self.beam_button.grid(row=4, column=0, columnspan=2)
         self.w_label.grid(row=5, column=0, sticky='E')
+        self.label_list.append(self.w_label)
         self.w_entry.grid(row=5, column=1, sticky='E')
+        self.entry_list.append(self.w_entry)
         self.w_val.set("")
         self.angle_label.grid(row=6, column=0, sticky='E')
+        self.label_list.append(self.angle_label)
         self.angle_entry.grid(row=6, column=1, sticky='E')
+        self.entry_list.append(self.angle_entry)
         self.angle_val.set("")
         self.angleB_label.grid(row=7, column=0, sticky='E')
+        self.label_list.append(self.angleB_label)
         self.angleB_entry.grid(row=7, column=1, sticky='E')
         self.angleB_val.set("")
         self.beam_canvas.grid(row=0, column=2, rowspan=7)
@@ -294,8 +369,11 @@ class DeflectionEquationSolution:
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "力矩(单位为N*m，顺时针为正方向)="
+        self.angle_label["text"] = "端截面转角(单位为弧度)："
         self.beam_button["command"] = self.cantilever_beam_moment_determine
         self.arrange_Interface1()
 
@@ -340,8 +418,11 @@ class DeflectionEquationSolution:
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "力(单位为N，向下为正方向)="
+        self.angle_label["text"] = "端截面转角(单位为弧度)："
         self.beam_button["command"] = self.cantilever_beam_power_determine
         self.arrange_Interface1()
 
@@ -388,8 +469,11 @@ class DeflectionEquationSolution:
         self.w_entry2.grid_forget()
         self.angleB_label.grid_forget()
         self.angleB_entry.grid_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "均布载荷集度(单位为N*m^(-1))，向下为正方向)="
+        self.angle_label["text"] = "端截面转角(单位为弧度)："
         self.beam_button["command"] = self.cantilever_beam_UL_determine
         self.arrange_Interface1()
 
@@ -432,8 +516,11 @@ class DeflectionEquationSolution:
     def simple_beam_moment_interface(self):
         # 删除多余构件
         self.initial_text.pack_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "力矩(单位为N*m，顺时针为正方向)="
+        self.angle_label["text"] = "左端截面转角(单位为弧度)："
         self.beam_button["command"] = self.simple_beam_moment_determine
         self.arrange_Interface2()
 
@@ -500,8 +587,11 @@ class DeflectionEquationSolution:
     def simple_beam_power_interface(self):
         # 删除多余构件
         self.initial_text.pack_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "力(单位为N，向下为正方向)="
+        self.angle_label["text"] = "左端截面转角(单位为弧度)："
         self.beam_button["command"] = self.simple_beam_power_determine
         self.arrange_Interface2()
 
@@ -567,8 +657,11 @@ class DeflectionEquationSolution:
         self.a_label.grid_forget()
         self.a_entry.grid_forget()
         self.w_entry2.grid_forget()
+        self.label_list = []
+        self.entry_list = []
         # 更改构件
         self.F_label["text"] = "均布载荷集度(单位为N*m^(-1))，向下为正方向)="
+        self.angle_label["text"] = "左端截面转角(单位为弧度)："
         self.beam_button["command"] = self.simple_beam_UL_determine
         self.arrange_Interface3()
 
@@ -616,12 +709,16 @@ class DeflectionEquationSolution:
             justify="left",
             text="使用步骤如下：\n1.从菜单栏中选择梁的种类和受力类型；\n2.输入受\
 力值、弹性模量、惯性矩等参数；\n3.点击确定按钮，从下面文本框可以读取挠度方程和端截\
-面转角，从右侧可以看到受力示意图和弯曲后的轴线（红色虚线）。\n\n注：\n1.此处计算结\
-果仅适用于弹性范围内；\n2.此处仅可以计算悬臂梁和简支梁模型，外伸梁可以基于这两种情\
-况用叠加法计算；\n3.由于此处解算进行了平截面假设、对称弯曲假设和纯弯曲假设，计算结\
-果仅适用于横截面关于剪力方向对称的细长梁；\n4.此处仅计算受力点在自由端或全梁受均布\
-载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出；\n5.在工程中，挠度\
-相对跨度极小，因此图中弯曲后的直线是挠度增大到原来的5000倍的结果。")
+面转角，从右侧可以看到受力示意图和弯曲后的轴线（红色虚线）。\n\n其他功能：点击菜单\
+栏中“文件”后，点击“保存当前窗口”可以保存当前窗口为.jpg文件；点击“保存为文本”可以保\
+持当前输入的\n参数和显示结果为.txt文件；点击“退出”可以退出程序；\n\n注：\n1.此处计\
+算结果仅适用于弹性范围内；\n2.此处仅可以计算悬臂梁和简支梁模型，外伸梁可以基于这两\
+种情况用叠加法计算；\n3.由于此处解算进行了平截面假设、对称弯曲假设和纯弯曲假设，计\
+算结果仅适用于横截面关于剪力方向对称的细长梁；\n4.此处仅计算受力点在自由端或全梁受\
+均布载荷等最基本情况，其他情况可以根据端截面转角或叠加法方便地算出；\n5.在工程中，\
+挠度相对跨度极小，因此图中弯曲后的直线是挠度增大到原来的5000倍的结果。\n6.“保存当\
+前窗口”功能仅适用于显示缩放大小为125%的电脑；\n7.“保存为文本”功能仅保存当前界面参\
+数和计算结果，不能检测当前参数是否可以计算和当前结果是否为当前参数计算出；")
         self.help_label.pack()
 
     # 显示关于窗口
