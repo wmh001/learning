@@ -23,14 +23,17 @@ for i in range(0, len(data), 3):
 
 # 处理字符串
 for c in "hello world":
-    print(c)
+    print(c, end="")
 # 处理元组
 for i in (1, 2, 3):
     print(i)
 # 处理嵌套序列
 for t in [(1, 2), (3, 4), (5, 6)]:
     print(t,  t[0], t[1])
-
+for (x, y) in [(1, 2), (3, 4), (5, 6)]:
+    print(x, y)
+for ((a, b), c) in [([1, 2], 3), ['XY', 6]]:
+    print(a, b, c)
 # while循环
 # 主要用于不确定次数的循环
 """
