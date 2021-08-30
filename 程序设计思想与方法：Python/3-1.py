@@ -24,7 +24,9 @@ f = float(input("华氏度："))
 c = (f - 32) * 5.0 / 9
 print("摄氏度：" + str(c))
 if c > 35:
-    print("警告：高温!")
+    print("警告：高温！")
+if c <= -6:
+    print("警告：低温！")
 
 # 两路分支结构
 """
@@ -36,29 +38,29 @@ else:
 # if和else是非此即彼的关系
 # 以下程序逻辑有误
 if c >= 35:
-    print("警告：高温!")
+    print("警告：高温！")
 else:
-    print("警告：低温!")
+    print("警告：低温！")
 
 # 多路分支结构
 
 # if语句嵌套
 # 缺点：可读性差、代码松散
 if c >= 35:
-    print("警告：高温!")
+    print("警告：高温！")
 else:
     if c <= -6:
-        print("警告：低温!")
+        print("警告：低温！")
     else:
-        print("舒适!")
+        print("舒适！")
 
 # if-elif-else结构
 if c >= 35:
-    print("警告：高温!")
+    print("警告：高温！")
 elif c <= -6:
-    print("警告：低温!")
+    print("警告：低温！")
 else:
-    print("舒适!")
+    print("舒适！")
 
 # 错误检测代码
 # 利用if判断是否发生了某种运行错误
@@ -73,7 +75,7 @@ if discrim >= 0:
     root2 = (-b - discRoot) / (2 * a)
     print("解是:" + str(root1) + ' ' + str(root2))
 else:
-    print("方程无解!")
+    print("方程无解！")
 
 # 异常处理机制
 # 缺省异常处理：程序运行出错时，抛出错误种类、位置等基本信息
@@ -124,4 +126,8 @@ try:
     root2 = (-b - discRoot) / (2 * a)
     print("解是:" + str(root1) + ' ' + str(root2))
 except ValueError:
-    print("方程无解!")
+    print("方程无解！")
+except NameError:
+    print("变量未定义！")
+except:
+    print("出现错误！")
