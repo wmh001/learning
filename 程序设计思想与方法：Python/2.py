@@ -38,10 +38,10 @@ print(s)
 # 合法值：小数（3.14、-2.718、13.、0.0）。
 # 合法运算：加+、减-、乘*、除/、乘方**、余数%
 # 计算机只能存储浮点数的近似值
-print(1.2-1.0)
-print(2.2-1.2)
-print(2.0-1.0)
-print(abs(1.0000000000000001-1))
+print(1.2 - 1.0)
+print(2.2 - 1.2)
+print(2.0 - 1.0)
+print(abs(1.0000000000000001 - 1))
 # 系统可区分的浮点数最小差为
 print(sys.float_info.epsilon)
 # 对于很大和很小的浮点数，Python自动用科学计数法
@@ -50,3 +50,7 @@ print(sys.float_info.epsilon)
 # 人工类型转换：float(参数)、int(参数)
 print(float(1))
 print(int(1.5))
+
+# 自动转换：int、long、float；int、float
+# python2中，avg = sum / count将取整，avg = float(sum) / count将获得实际值
+# python2中，avg = sum / count将获得实际值，avg = int(sum / count)将取整
