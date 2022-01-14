@@ -54,3 +54,28 @@ print(int(1.5))
 # 自动转换：int、long、float；int、float
 # python2中，avg = sum / count将取整，avg = float(sum) / count将获得实际值
 # python2中，avg = sum / count将获得实际值，avg = int(sum / count)将取整
+
+# 数学模块
+# 模块：包含许多有用的定义，也称为库。最常见的是函数定义，也有类定义。一般由系统提供，也可自己开发
+# math模块：包含有用的数学函数定义
+# import语句：将别人的模块定义导入我的模块
+
+# 库的两种导入方式：
+# import math           #给你一包糖果
+# from math import *    #从包中取出糖果给你
+
+# 导入后对库函数的调用：例如求平方根
+# math.sqrt(4)          #要说包里的某颗糖果
+# sqrt(4)               #直接说某颗糖果
+
+# 数学库中的常用函数
+# pi：常数π
+# e：常数e
+# sqrt(x)：平方根
+# sin(x)，cos(x)，tan(x)，asin(x)，acos(x)，atan(x)：三角函数和反三角函数
+# log(x)，log10(x)：自然对数与常用对数
+# exp(x)：e的x次方
+# ceil(x)：≥x的最小整数
+# floor(x)：≤x的最大整数
+# degrees(r)：r弧度转换为度
+# hypot(x,y)：返回根号(x^2+y^2)
